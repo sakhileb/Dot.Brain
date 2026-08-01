@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dot.brain/schemas/event.schema.json",
+  "title": "DKP Event Model Payload Body",
+  "type": "object",
+  "required": ["event_name", "domain", "trigger", "schema_fields"],
+  "additionalProperties": false,
+  "patternProperties": { "^x-": {} },
+  "properties": {
+    "event_name": { "type": "string", "pattern": "^[a-z0-9_.]+$" },
+    "domain": { "type": "string" },
+    "description": { "type": "string" },
+    "trigger": { "type": "string", "description": "Condition or action that emits the event" },
+    "schema_fields": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "required": { "type": "boolean", "default": false },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "producers": { "type": "array", "items": { "type": "string" } },
+    "consumers": { "type": "array", "items": { "type": "string" } },
+    "frequency_estimate": { "type": "string", "description": "e.g. ~500/day" },
+    "retention_days": { "type": "integer", "minimum": 0 }
+  }
+}

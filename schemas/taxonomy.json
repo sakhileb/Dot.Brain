@@ -1,0 +1,44 @@
+{
+  "$id": "https://dot.brain/schemas/taxonomy.json",
+  "title": "Dot.Brain Topic Taxonomy — machine-readable root",
+  "description": "Canonical export of the topic taxonomy defined in brain.semantic.md §2. Platforms validate DKP payload terms against this artifact. Governance: domain agents propose terms in their subtree; Knowledge Agent owns the root; terms used by >= 2 platforms are frozen against rename. Unmatched terms follow the SAME_AS candidate flow (brain.semantic.md §3) — never auto-merged.",
+  "taxonomy_version": "1.0.0",
+  "published": "2026-08-01",
+  "owner_agent": "Knowledge",
+  "term_pattern": "^[a-z0-9_]+(\\.[a-z0-9_]+){1,2}$",
+  "statuses": {
+    "active": "usable in DKP payloads",
+    "frozen": "active and rename-protected (>= 2 platform consumers)",
+    "provisional": "platform-local, visible in search, flagged unmapped pending monthly review",
+    "deprecated": "superseded; mapped_to required"
+  },
+  "domains": {
+    "agri": { "owner_agent": "Agriculture", "terms": ["agri.crop.moisture_stress", "agri.harvest.window", "agri.logistics.transport_timing"] },
+    "mining": { "owner_agent": "Mining", "terms": ["mining.haulage.cycle_time", "mining.conveyor.transfer", "mining.dispatch.override"] },
+    "commerce": { "owner_agent": "Marketplace", "terms": ["commerce.listing.category", "commerce.listing.timing", "commerce.demand.signal"] },
+    "auction": { "owner_agent": "Marketplace", "terms": ["auction.lot.category", "auction.mechanism.clearing", "auction.reserve.policy"] },
+    "social": { "owner_agent": "Community", "terms": ["social.topic.signal", "social.question.resolution", "social.warning.early"] },
+    "finance": { "owner_agent": "Finance", "terms": ["finance.settlement.latency", "finproduct.repayment.schedule", "finance.dunning.recovery"] },
+    "trading": { "owner_agent": "Trading", "terms": ["trading.signal.hit", "trading.disclosure.compliance"] },
+    "logistics": { "owner_agent": "Logistics", "terms": ["logistics.corridor.condition", "logistics.fleet.downtime"] },
+    "people": { "owner_agent": "People", "terms": ["people.role.coverage", "people.cert.requirement", "people.shift.structure"] },
+    "delivery": { "owner_agent": "Delivery", "terms": ["delivery.milestone.schedule", "routine.queue.health", "routine.rework.pairing"] },
+    "extension": { "owner_agent": "Extension", "terms": ["extension.capability.grant", "extension.anomaly.pattern"] },
+    "engagement": { "owner_agent": "Dopamine", "terms": ["engagement.outcome.coupling", "engagement.mechanic.certification"] },
+    "infra": { "owner_agent": "Memory", "terms": ["memory.retrieval.class", "colony.escalation.precision", "messaging.notification.precision", "analytics.view.composition", "design.comprehension.gate", "brain.calibration.band"] }
+  },
+  "frozen_terms": [
+    "mining.haulage.cycle_time",
+    "commerce.listing.category",
+    "social.topic.signal",
+    "auction.lot.category"
+  ],
+  "mappings": {
+    "SAME_AS_resolved": [
+      { "from": "agri.crop.water_deficit_stress", "to": "agri.crop.moisture_stress", "similarity": 0.93, "resolved": "2026-08-01", "reviewer": "Knowledge Agent" }
+    ]
+  },
+  "change_log": [
+    { "version": "1.0.0", "date": "2026-08-01", "author": "DKP Architect (prompt 02, AI)", "change": "Initial machine-readable root: 14 domain subtrees seeded from published platform docs; four frozen terms (>= 2 consumers); worked SAME_AS mapping carried from brain.semantic.md §6" }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dot.brain/schemas/insight.schema.json",
+  "title": "DKP Insight Payload Body",
+  "type": "object",
+  "required": ["statement", "domain", "evidence", "method"],
+  "additionalProperties": false,
+  "patternProperties": { "^x-": {} },
+  "properties": {
+    "statement": { "type": "string", "minLength": 1, "description": "The finding, as a single falsifiable assertion" },
+    "domain": { "type": "string" },
+    "method": { "type": "string", "description": "How the insight was derived (analysis, model, observation)" },
+    "evidence": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["kind", "reference"],
+        "properties": {
+          "kind": { "enum": ["metric", "dataset", "pack", "incident", "experiment", "external"] },
+          "reference": { "type": "string" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "scope": { "type": "string", "description": "Where the insight applies (site, tenant, global)" },
+    "valid_until": { "type": "string", "format": "date-time" },
+    "counter_evidence": {
+      "type": "array",
+      "items": { "type": "object", "required": ["reference"], "properties": { "reference": { "type": "string" }, "note": { "type": "string" } } }
+    }
+  }
+}

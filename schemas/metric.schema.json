@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dot.brain/schemas/metric.schema.json",
+  "title": "DKP Metric Payload Body",
+  "type": "object",
+  "required": ["metric_name", "domain", "unit", "definition"],
+  "additionalProperties": false,
+  "patternProperties": { "^x-": {} },
+  "properties": {
+    "metric_name": { "type": "string", "pattern": "^[a-z0-9_.]+$" },
+    "domain": { "type": "string" },
+    "definition": { "type": "string", "description": "Exact, unambiguous computation rule" },
+    "unit": { "type": "string" },
+    "direction_of_good": { "enum": ["up", "down", "target-band"] },
+    "dimensions": { "type": "array", "items": { "type": "string" } },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["timestamp", "value"],
+        "additionalProperties": false,
+        "patternProperties": { "^x-": {} },
+        "properties": {
+          "timestamp": { "type": "string", "format": "date-time" },
+          "value": { "type": "number" },
+          "dimensions": { "type": "object", "additionalProperties": { "type": "string" } },
+          "sample_size": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "baseline": { "type": "number" },
+    "target": { "type": "number" }
+  }
+}

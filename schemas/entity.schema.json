@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dot.brain/schemas/entity.schema.json",
+  "title": "DKP Entity Model Payload Body",
+  "type": "object",
+  "required": ["entity_name", "domain", "attributes", "identity"],
+  "additionalProperties": false,
+  "patternProperties": { "^x-": {} },
+  "properties": {
+    "entity_name": { "type": "string", "minLength": 1 },
+    "domain": { "type": "string", "minLength": 1 },
+    "description": { "type": "string" },
+    "attributes": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "additionalProperties": false,
+        "patternProperties": { "^x-": {} },
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "required": { "type": "boolean", "default": false },
+          "description": { "type": "string" },
+          "unit": { "type": "string" }
+        }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "required": ["natural_key"],
+      "properties": {
+        "natural_key": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "uniqueness_scope": { "enum": ["global", "tenant", "platform"], "default": "platform" }
+      }
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["attribute", "target_entity"],
+        "properties": {
+          "attribute": { "type": "string" },
+          "target_entity": { "type": "string" },
+          "cardinality": { "enum": ["one", "many"] }
+        }
+      }
+    }
+  }
+}

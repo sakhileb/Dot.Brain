@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dot.brain/schemas/incident.schema.json",
+  "title": "DKP Incident Report Payload Body",
+  "type": "object",
+  "required": ["incident_id", "kind", "severity", "detection", "impact", "timeline", "root_cause", "corrective_actions", "lessons"],
+  "additionalProperties": false,
+  "patternProperties": { "^x-": {} },
+  "properties": {
+    "incident_id": { "type": "string", "minLength": 1 },
+    "kind": { "enum": ["incident", "outage", "security_event", "failed_experiment", "rollback", "disaster"] },
+    "severity": { "enum": ["sev1", "sev2", "sev3", "sev4"] },
+    "detection": {
+      "type": "object",
+      "required": ["detected_at", "detected_by", "method"],
+      "properties": {
+        "detected_at": { "type": "string", "format": "date-time" },
+        "detected_by": { "type": "string" },
+        "method": { "type": "string" },
+        "mttd_minutes": { "type": "number", "minimum": 0 }
+      }
+    },
+    "impact": {
+      "type": "object",
+      "required": ["systems", "description"],
+      "properties": {
+        "systems": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "users_affected": { "type": "integer", "minimum": 0 },
+        "business_cost_estimate": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+    "timeline": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["at", "event"],
+        "properties": {
+          "at": { "type": "string", "format": "date-time" },
+          "event": { "type": "string" },
+          "actor": { "type": "string" }
+        }
+      }
+    },
+    "root_cause": {
+      "type": "object",
+      "required": ["statement"],
+      "properties": {
+        "statement": { "type": "string" },
+        "contributing_factors": { "type": "array", "items": { "type": "string" } },
+        "pattern_refs": { "type": "array", "items": { "type": "string" }, "description": "Graph node IDs of the vulnerable pattern, used for lesson propagation" }
+      }
+    },
+    "corrective_actions": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["action", "owner", "due"],
+        "properties": {
+          "action": { "type": "string" },
+          "owner": { "type": "string" },
+          "due": { "type": "string", "format": "date" },
+          "status": { "enum": ["open", "in_progress", "done", "cancelled"], "default": "open" }
+        }
+      }
+    },
+    "lessons": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["lesson", "verified"],
+        "properties": {
+          "lesson": { "type": "string" },
+          "verified": { "type": "boolean" },
+          "verification_evidence": { "type": "string" }
+        }
+      }
+    },
+    "resolved_at": { "type": "string", "format": "date-time" }
+  }
+}

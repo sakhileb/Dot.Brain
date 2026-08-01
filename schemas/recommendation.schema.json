@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dot.brain/schemas/recommendation.schema.json",
+  "title": "DKP Recommendation Payload Body",
+  "type": "object",
+  "required": ["proposal", "target_platform", "rationale", "impact", "rollback", "review_window_days"],
+  "additionalProperties": false,
+  "patternProperties": { "^x-": {} },
+  "properties": {
+    "proposal": { "type": "string", "minLength": 1 },
+    "target_platform": { "type": "string", "pattern": "^dot-[a-z0-9-]+$" },
+    "rationale": { "type": "string", "minLength": 1 },
+    "evidence": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "impact": {
+      "type": "object",
+      "required": ["business", "user", "dopamine"],
+      "additionalProperties": false,
+      "properties": {
+        "business": { "$ref": "#/$defs/impactDeclaration" },
+        "user": { "$ref": "#/$defs/impactDeclaration" },
+        "dopamine": { "$ref": "#/$defs/impactDeclaration" }
+      }
+    },
+    "rollback": {
+      "type": "object",
+      "required": ["procedure", "blast_radius", "watch_signals"],
+      "properties": {
+        "procedure": { "type": "string" },
+        "blast_radius": { "type": "string" },
+        "watch_signals": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      }
+    },
+    "review_window_days": { "type": "integer", "minimum": 1, "maximum": 90, "default": 30 }
+  },
+  "$defs": {
+    "impactDeclaration": {
+      "type": "object",
+      "required": ["metric", "baseline", "target", "measurement_window"],
+      "additionalProperties": false,
+      "patternProperties": { "^x-": {} },
+      "properties": {
+        "metric": { "type": "string", "description": "Registered metric name; dopamine metrics must not be on the prohibited list in brain.dopemine.md" },
+        "baseline": { "type": "number" },
+        "target": { "type": "number" },
+        "measurement_window": { "type": "string", "description": "e.g. 60d post-merge" }
+      }
+    }
+  }
+}

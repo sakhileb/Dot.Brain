@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dot.brain/schemas/workflow.schema.json",
+  "title": "DKP Workflow Model Payload Body",
+  "type": "object",
+  "required": ["workflow_name", "domain", "steps"],
+  "additionalProperties": false,
+  "patternProperties": { "^x-": {} },
+  "properties": {
+    "workflow_name": { "type": "string", "minLength": 1 },
+    "domain": { "type": "string" },
+    "description": { "type": "string" },
+    "actors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "kind"],
+        "properties": {
+          "name": { "type": "string" },
+          "kind": { "enum": ["human", "ai", "system", "machine"] }
+        }
+      }
+    },
+    "steps": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name"],
+        "additionalProperties": false,
+        "patternProperties": { "^x-": {} },
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "actor": { "type": "string" },
+          "inputs": { "type": "array", "items": { "type": "string" } },
+          "outputs": { "type": "array", "items": { "type": "string" } },
+          "transitions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["to"],
+              "properties": {
+                "to": { "type": "string" },
+                "condition": { "type": "string" }
+              }
+            }
+          },
+          "typical_duration": { "type": "string" }
+        }
+      }
+    },
+    "entry_step": { "type": "string" },
+    "sla": { "type": "string" }
+  }
+}
