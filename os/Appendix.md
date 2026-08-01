@@ -1,6 +1,6 @@
 ---
 title: Dot Ecosystem — Appendix
-version: 1.0.0
+version: 1.1.0
 status: active
 owners: [Sakhile Bhayi]
 last-review: 2026-08-01
@@ -35,14 +35,14 @@ Repo URL pattern is `github.com/sakhilebhayi/<name>` unless a naming discrepancy
 | Dot.Charts | `github.com/sakhilebhayi/ChartSense` | Real code | **Naming discrepancy:** repo is `ChartSense`, not `Dot.Charts`; early-stage trading-chart tool with honestly-labeled demo output, not the full SMC/ICT platform described in `brain.*` docs |
 | Dot.Central | `github.com/sakhilebhayi/Dot.Central` | Real code | AI-agent command center; mining-dispatch domain scaffold added this session — domain mismatch vs. original brief flagged in [platforms/dot-central.md](../platforms/dot-central.md) |
 | Dot.Design | `github.com/sakhilebhayi/Dot.Design` | Real code | AI canvas design tool; token/component-library scaffold added this session — domain mismatch vs. original brief flagged in [platforms/dot-design.md](../platforms/dot-design.md) |
-| Dot.Plug | `github.com/sakhilebhayi/Dot.Plug` | Empty scaffold | Developer marketplace / extension framework — not yet built |
-| Dot.Farms | `github.com/sakhilebhayi/Dot.Farms` | Empty scaffold | Agriculture ERP — not yet built |
-| Dot.HR | `github.com/sakhilebhayi/Dot.HR` | Empty scaffold | Human Resource platform — not yet built |
-| Dot.Dopemine | `github.com/sakhilebhayi/Dot.Dopemine` | Empty scaffold | Engagement intelligence engine — not yet built |
-| Dot.Memory | `github.com/sakhilebhayi/Dot.Memory` | Empty scaffold | Long-term semantic memory — not yet built |
+| Dot.Plug | `github.com/sakhilebhayi/Dot.Plug` | Real code (hand-authored, unverified) | Developer marketplace / extension framework — Jetstream shell copied from Dot.Billing, Extension/Installation domain built from scratch |
+| Dot.Farms | `github.com/sakhilebhayi/Dot.Farms` | Real code (hand-authored, unverified) | Agriculture ERP — Farm/Field/Crop/CropCycle/HarvestRecord domain built from scratch |
+| Dot.HR | `github.com/sakhilebhayi/Dot.HR` | Real code (hand-authored, unverified) | Human Resource platform — Employee/Position/LeaveRequest domain built from scratch; has a known open authorization gap, see [13-Engineering-State.md](13-Engineering-State.md) §3 |
+| Dot.Dopemine | `github.com/sakhilebhayi/Dot.Dopemine` | Real code (hand-authored, unverified) | Engagement intelligence engine — Mechanic catalog with the ethics constraint enforced at three structural layers |
+| Dot.Memory | `github.com/sakhilebhayi/Dot.Memory` | Real code (hand-authored, unverified) | Long-term semantic memory — storage/retrieval telemetry domain with "store without reading" enforced at the schema level |
 | Dot.Brain | (this repo) | Fully speced, not a SaaS app | ~35 `brain.*.md` docs, 21 platform knowledge docs, 11 ADRs — the knowledge/reasoning layer, not a product platform |
 
-**Count:** 15 platforms with real code, 5 empty scaffolds, plus Dot.Brain itself (the knowledge layer, structurally different from the other 20). "~20 platforms" in the rest of this doc set means these 20 product platforms, Dot.Brain counted separately as the layer above them.
+**Count:** all 20 product platforms now have real code (15 extending an already-installed Jetstream app, 5 hand-authored from an empty scaffold this session), plus Dot.Brain itself (the knowledge layer, structurally different from the other 20). "~20 platforms" in the rest of this doc set means these 20 product platforms, Dot.Brain counted separately as the layer above them. **None of the 20 has been executed against a real PHP/Postgres environment** — see [13-Engineering-State.md](13-Engineering-State.md) §4.
 
 ## 2. Logo assets
 
@@ -84,7 +84,7 @@ Full definitions live in [../indexes/GLOSSARY.md](../indexes/GLOSSARY.md); this 
 | **Knowledge Pack** | Synonym for DKP instance — one published, immutable unit (draft → published → ingested → validated → related → superseded/deprecated). | [../brain.dkp.md](../brain.dkp.md) §1 |
 | **wiki.md vs. platforms/*.md** | `wiki.md` lives inside each platform's own repo and is platform-owned, authoritative ground truth. `platforms/<name>.md` in this repo is Dot.Brain's *ingested view* of that platform — it can drift or be flagged as mismatched (see Dot.Central, Dot.Design, Dot.Charts entries in §1) and the wiki always wins on conflict. | [../brain.platforms.md](../brain.platforms.md) |
 | **The platform-loop** | The audit → fix → test → document → commit cycle run against one platform per pass. This session ran it in **bounded, single-platform form** — not the unbounded, ecosystem-wide, continuously-running version some `brain.*.md` docs describe as a future target. See [14-Credit-Optimization.md](14-Credit-Optimization.md). | [../brain.workflows.md](../brain.workflows.md) |
-| **MVP scaffold** | A platform repository that exists (Jetstream Teams skeleton, routing, auth) but has no real domain features built yet — the state Dot.Plug, Dot.Farms, Dot.HR, Dot.Dopemine, and Dot.Memory are in today. | this appendix, §1 |
+| **MVP scaffold** | A platform repository with a Jetstream Teams skeleton (auth, routing) and a bounded, first-pass domain layer — not a fully-featured product. All 20 platforms are at roughly this maturity level today; none has been executed against a real environment. | this appendix, §1 |
 | **Domain mismatch (flagged)** | A documented discrepancy between what a `platforms/*.md` doc describes and what the platform's real repo actually implements (e.g. Dot.Central's mining-dispatch description vs. its real AI command-center codebase) — recorded, not silently corrected, pending human reconciliation. | [../platforms/dot-central.md](../platforms/dot-central.md), [../platforms/dot-design.md](../platforms/dot-design.md) |
 | **Naming discrepancy (flagged)** | A documented mismatch between a platform's registry name and its actual GitHub repo name (Dot.Mines → `mines`, Dot.Charts → `ChartSense`). | [../platforms/dot-mines.md](../platforms/dot-mines.md), [../platforms/dot-charts.md](../platforms/dot-charts.md) |
 | **Superseded scope note** | The documented pattern for recording that an earlier, larger platform vision was retracted in favor of what the real code turned out to be (used for Dot.Finance). Old content is preserved in git history, not carried forward as current fact. | [../platforms/dot-finance.md](../platforms/dot-finance.md) |
@@ -104,6 +104,7 @@ Full definitions live in [../indexes/GLOSSARY.md](../indexes/GLOSSARY.md); this 
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Owner + AI (os/ document set, session 1) | Initial appendix; platform list, logo location, and glossary excerpt verified against this repo and the logos folder at write time |
+| 1.1.0 | 2026-08-01 | Sakhile Bhayi | Updated all 5 previously-empty platforms to "Real code (hand-authored, unverified)" now that they're built and pushed; corrected the MVP-scaffold glossary entry accordingly |
 
 ## Open Questions
 

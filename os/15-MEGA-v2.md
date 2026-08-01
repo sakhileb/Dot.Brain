@@ -1,6 +1,6 @@
 ---
 title: Dot Ecosystem — MEGA v2 (Composite Platform Scoring Model)
-version: 1.0.0
+version: 1.1.0
 status: active
 owners: [Sakhile Bhayi]
 last-review: 2026-08-01
@@ -60,33 +60,39 @@ Derived directly from [os/13-Engineering-State.md](13-Engineering-State.md) §2 
 | Dot.Central | 2 | 1 | 2 | 2 | 0 | 7 | UI-parity pass only this round, no fresh full security scan (see [13-Engineering-State.md](13-Engineering-State.md) open questions). |
 | Dot.Design | 2 | 1 | 2 | 2 | 0 | 7 | Same as Dot.Central — UI-parity pass, no fresh full security scan. |
 
-**Ecosystem mean (15 platforms): 7.3 / 10.** The ceiling every platform is bumping against is the same one dimension: `I = 0` across the board.
+**Mean of these 15: 7.53 / 10.** The ceiling every platform is bumping against is the same one dimension: `I = 0` across the board.
 
-## 4. The 5 empty scaffolds
+## 4. The 5 hand-authored platforms
 
-Score **0 / 10** by definition — no code exists yet. Listed for completeness, not to imply deficiency: an empty scaffold correctly scores zero on every dimension because there is nothing to measure. See [18-Platform-Lifecycle.md](18-Platform-Lifecycle.md) stage 1.
+Built from an empty scaffold this session by copying Dot.Billing's real Jetstream shell file-by-file, then adding a from-scratch domain layer (see [13-Engineering-State.md](13-Engineering-State.md) §3). Scored on the same rubric as §3 — these are no longer empty, and score accordingly, though `S` reflects that nothing here has been executed any more than the other 15 have (that caveat is ecosystem-wide, not specific to this group — see [17-Security.md](17-Security.md) §4).
 
-| Platform | MEGA |
-|---|---|
-| Dot.Plug | 0 |
-| Dot.Farms | 0 |
-| Dot.HR | 0 |
-| Dot.Dopemine | 0 |
-| Dot.Memory | 0 |
+| Platform | E | S | D | Doc | I | MEGA | Why |
+|---|---|---|---|---|---|---|---|
+| Dot.Memory | 2 | 2 | 2 | 2 | 0 | 8 | "Store without reading" enforced structurally (no content-shaped column exists anywhere in the schema) and backed by a dedicated regression test — verified directly against the schema, not just the claim. |
+| Dot.Plug | 2 | 2 | 2 | 2 | 0 | 8 | Certification gate and team-scoped install/uninstall verified directly in the controller. |
+| Dot.Dopemine | 2 | 2 | 2 | 2 | 0 | 8 | The manifesto's ethics constraint enforced at three independent layers (closed enum, action-level check, model `saving` listener) — verified line-by-line, the strongest engineering of this group. |
+| Dot.Farms | 2 | 2 | 2 | 2 | 0 | 8 | `FarmPolicy` verified across every child-resource controller; the one resource without by-ID routes (Crop) confirmed to have no cross-team surface at all. |
+| Dot.HR | 2 | 1 | 2 | 2 | 0 | 7 | Real, current gap: any team member — not just an admin — can mutate employee records. Docblock originally overclaimed a role-gate that didn't exist in code; caught and corrected before push, but the underlying gap (unlike the docblock) is still open. |
+
+**Mean of these 5: 7.8 / 10** — slightly above the other 15's 7.53, largely because every one of these five was reviewed against its own specific claims line-by-line before push (a tighter review loop than several of the 15 got, per [08-Agent-System.md](08-Agent-System.md)'s scale-warning caveat on Agents/Pulse/Analytics/Central/Design).
+
+**Ecosystem mean, all 20 platforms: 7.6 / 10.**
 
 ## 5. What this model says to do next
 
-Two distinct signals, not one priority queue:
+Three distinct signals, not one priority queue:
 
-1. **Lowest-scoring platform with real code (Dot.Notify, 6/10):** its `E=1` is a completeness gap in its actual core purpose, not a security afterthought — the next pass should build the missing webhook endpoint with real signature verification, not just re-run the standard loop checklist.
-2. **`Dot.Agents`, `Dot.Pulse`, `Dot.Analytics`, `Dot.Central`, `Dot.Design` (all S=1):** these five never got a full, unscoped security scan — their internals were deliberately fenced off per [08-Agent-System.md](08-Agent-System.md)'s scale-warning pattern. That was the right call for a single bounded pass, but it means their S=1 is a statement about *what wasn't checked*, not a clean bill of health. A dedicated, deeper pass on exactly these five internals (governance stack, moderation pipeline, intelligence engines, AI-agent domain, design internals) is the highest-value next security action, separate from the platform-loop's general checklist.
-3. **Every platform's `I=0`:** this is the whole ecosystem's real bottleneck, not any single platform's fault. Closing it for even one platform (per [os/19-Knowledge-Packs.md](19-Knowledge-Packs.md) §4's blocker list — Dot.Billing is the best-scoped candidate) would be the first real end-to-end DKP round-trip this ecosystem has ever had, and would let this scoring model's `I` dimension mean something beyond zero for the first time.
+1. **Lowest-scoring platform (Dot.Notify, 6/10):** its `E=1` is a completeness gap in its actual core purpose, not a security afterthought — the next pass should build the missing webhook endpoint with real signature verification, not just re-run the standard loop checklist.
+2. **`Dot.Agents`, `Dot.Pulse`, `Dot.Analytics`, `Dot.Central`, `Dot.Design` (all S=1):** these five never got a full, unscoped security scan — their internals were deliberately fenced off per [08-Agent-System.md](08-Agent-System.md)'s scale-warning pattern. A dedicated, deeper pass on exactly these five internals is the highest-value next security action, separate from the platform-loop's general checklist.
+3. **`Dot.HR`'s real, named gap (S=1, not a "not fully checked" caveat like the group above — an actual open finding):** any team member can create/edit/delete employee PII today, not just an admin. Given this is the ecosystem's most person-sensitive data, this is arguably the single most concrete, actionable next security fix in the whole ecosystem — smaller in scope than a full re-scan of Dot.Agents' governance stack, and already has a docblock pointing at exactly what to build (Jetstream's team-permission system, configured but unused).
+4. **Every platform's `I=0`:** this is the whole ecosystem's real bottleneck, not any single platform's fault. Closing it for even one platform (per [os/19-Knowledge-Packs.md](19-Knowledge-Packs.md) §4's blocker list — Dot.Billing is the best-scoped candidate) would be the first real end-to-end DKP round-trip this ecosystem has ever had, and would let this scoring model's `I` dimension mean something beyond zero for the first time.
 
 ## Change Log
 
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Sakhile Bhayi | Initial scoring model — 5 dimensions, unweighted 0–10 composite, scored against the real state of all 15 built platforms plus the 5 empty scaffolds. |
+| 1.1.0 | 2026-08-01 | Sakhile Bhayi | Scored the 5 newly hand-authored platforms (§4); corrected the original 15-platform mean (was stated as 7.3, actually 7.53); added the ecosystem-wide 20-platform mean (7.6) and Dot.HR's real authorization gap as a §5 priority signal. |
 
 ## Open Questions
 
