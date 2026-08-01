@@ -1,6 +1,6 @@
 ---
 title: Dot.Central — Platform Knowledge
-version: 1.0.0
+version: 1.0.1
 status: active
 owners: [Operations Intelligence Lead, Mining Agent, Registry Agent]
 platform-id: dot-central
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.Central
+
+> **Platform-owned source:** [Dot.Central's wiki.md](https://github.com/sakhilebhayi/Dot.Central/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -118,9 +120,12 @@ One incident pack (2026): dispatch misroute F-PROC (shared with dot-mines — Ce
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: decision-moment ownership, dispatch-workflow node ID scheme (registry gap closed), canonical two-lane loop-latency contract, tenancy, withheld operator-speed surface, 3 domain metrics, manifest, worked round-trip |
 
+| 1.0.1 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Central's own wiki.md (platform repo) as the platform-owned source of truth |
+
 ## Open Questions
 
 | Question | Owner → Approver |
 |---|---|
 | Operational-lane 30 s p95 is asserted from current control-room practice — needs measurement once `central.decision_latency_p95` has a quarter of data | Mining Agent → SRE Lead |
 | Should `central.dispatch_override_rate` feed the colony's Loop B directly (structured override reasons), reusing brain.learning.md's taxonomy question? | Learning Agent → Chief AI Engineer |
+| **Domain mismatch (flagged 2026-08-01):** Dot.Central's actual repository implements an AI-agent command center (conversations, agent skills, usage logs) — not the mining-dispatch/control-room platform this document describes. Either this document is describing a future rebuild, or the registry entry is wrong. Needs human reconciliation before this doc's contents are treated as authoritative. See [Dot.Central's wiki.md](https://github.com/sakhilebhayi/Dot.Central/blob/main/wiki.md) for what's actually built. | Registry Agent → Chief Knowledge Engineer |

@@ -1,6 +1,6 @@
 ---
 title: Dot.Ehail — Platform Knowledge
-version: 1.0.0
+version: 1.0.1
 status: active
 owners: [Ehail Platform Lead, Logistics Agent, Registry Agent]
 platform-id: dot-ehail
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.Ehail
+
+> **Platform-owned source:** [Dot.Ehail's wiki.md](https://github.com/sakhilebhayi/Dot.Ehail/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -137,6 +139,8 @@ One incident pack (2026-05): a rural cell-window published with 4 vehicles — f
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: fleet entity model closed (fleet + corridor cell as graph units, individual trips excluded by design), spatial-first publication discipline (geohash-5 cells, O-D pair prohibition, dual floors), gig-economy prohibited-list instantiations named, P-2026-001 recorded as non-transfer candidate with failed condition, 3 domain metrics, worked round-trip |
+
+| 1.0.1 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Ehail's own wiki.md (platform repo) as the platform-owned source of truth |
 
 ## Open Questions
 

@@ -1,6 +1,6 @@
 ---
 title: Dot.Projects — Platform Knowledge
-version: 1.0.0
+version: 1.0.1
 status: active
 owners: [Projects Platform Lead, Delivery Agent, Registry Agent]
 platform-id: dot-projects
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.Projects
+
+> **Platform-owned source:** [Dot.Projects's wiki.md](https://github.com/sakhilebhayi/Dot.Projects/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -126,6 +128,8 @@ One incident pack (2026-06): a programme's phase estimates were systematically c
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: project/task boundary (phased vs. recurring, exclusive ownership, spawn/escalate handoffs), HR structure-to-structure consumption contract, failed-closure honesty rule, verified team-milestone mechanic deployment terms, 3 domain metrics, worked round-trip |
+
+| 1.0.1 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Projects's own wiki.md (platform repo) as the platform-owned source of truth |
 
 ## Open Questions
 

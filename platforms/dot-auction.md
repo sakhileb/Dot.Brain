@@ -1,6 +1,6 @@
 ---
 title: Dot.Auction — Platform Knowledge
-version: 1.0.2
+version: 1.0.3
 status: active
 owners: [Auction Platform Lead, Marketplace Agent, Registry Agent]
 platform-id: dot-auction
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.Auction
+
+> **Platform-owned source:** [Dot.Auction's wiki.md](https://github.com/sakhilebhayi/Dot.Auction/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -138,6 +140,8 @@ One incident pack (2026-04): a draft observation pack included per-lot bid count
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: mechanism scoping closed (mechanism-level knowledge in, bidder behavior excluded at type level), listing-vs-lot handoff contract answering Emall's filed question (exclusive ownership transfer, suspended expiry clock), settlement-before-publication rule, intrinsic-vs-layered dopamine line, 3 domain metrics, worked round-trip with provisional-band graduation |
 | 1.0.1 | 2026-08-01 | Repository Reviewer (prompt 07, AI) | Sealed-bid regulatory OQ struck (resolved by dot-finance.md regulatory watch) |
 | 1.0.2 | 2026-08-01 | DKP Architect (prompt 02, AI) | Taxonomy OQ struck (schemas/taxonomy.json published) |
+
+| 1.0.3 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Auction's own wiki.md (platform repo) as the platform-owned source of truth |
 
 ## Open Questions
 

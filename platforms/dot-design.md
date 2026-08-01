@@ -1,6 +1,6 @@
 ---
 title: Dot.Design — Platform Knowledge
-version: 1.0.0
+version: 1.0.1
 status: active
 owners: [Design Platform Lead, UX Agent, Registry Agent]
 platform-id: dot-design
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.Design
+
+> **Platform-owned source:** [Dot.Design's wiki.md](https://github.com/sakhilebhayi/Dot.Design/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -139,9 +141,12 @@ One incident pack (2026-04): a minor-version motion-token change triggered vesti
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: token-consumption contract closed (versioned pinning, 90-day breaking notice, drift ceiling, Brain-surface comprehension certification, Plug inheritance), four inherited OQs settled (intent-label wording, single rendering path via Analytics views, worker-visibility component, Loop C comprehension measurement), 3 domain metrics, worked round-trip |
 
+| 1.0.1 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Design's own wiki.md (platform repo) as the platform-owned source of truth |
+
 ## Open Questions
 
 | Question | Owner → Approver |
 |---|---|
 | Comprehension-gate threshold: single ecosystem-wide floor or per-surface floors (a regulator-facing disclosure vs. a farm dashboard read very differently)? | UX Agent → Governance Board |
 | Localization: does comprehension certification hold per language, and who funds trials for low-volume locales? | Design Platform Lead → Governance Board |
+| **Domain mismatch (flagged 2026-08-01):** Dot.Design's actual repository implements a canvas-based AI graphic design tool (Canva-style: projects, canvases, AI image generation) — not the enterprise design-token/component-library system this document describes. Needs human reconciliation before this doc's contents are treated as authoritative. See [Dot.Design's wiki.md](https://github.com/sakhilebhayi/Dot.Design/blob/main/wiki.md) for what's actually built. | Registry Agent → Chief Knowledge Engineer |

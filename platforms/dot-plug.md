@@ -1,6 +1,6 @@
 ---
 title: Dot.Plug — Platform Knowledge
-version: 1.0.0
+version: 1.0.1
 status: active
 owners: [Plug Platform Lead, Extension Agent, Registry Agent]
 platform-id: dot-plug
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.Plug
+
+> **Platform-owned source:** [Dot.Plug's wiki.md](https://github.com/sakhilebhayi/Dot.Plug/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -128,6 +130,8 @@ One incident pack (2026-06): a certified logistics connector began reading a dat
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: extension entity model closed (capability holders, not code; internals excluded at type level), third-party boundary wired (publisher-signed packs, host-manifest inheritance, trust from 0.50, no mandatory Brain relationship — future.md non-reservation honored), dual-keyed tenancy with publisher consent rule, developer-aimed prohibited patterns withheld, 3 domain metrics, worked round-trip |
+
+| 1.0.1 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Plug's own wiki.md (platform repo) as the platform-owned source of truth |
 
 ## Open Questions
 

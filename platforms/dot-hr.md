@@ -1,6 +1,6 @@
 ---
 title: Dot.HR — Platform Knowledge
-version: 1.0.1
+version: 1.0.2
 status: active
 owners: [HR Platform Lead, People Agent, Registry Agent]
 platform-id: dot-hr
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.HR
+
+> **Platform-owned source:** [Dot.HR's wiki.md](https://github.com/sakhilebhayi/Dot.HR/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -142,6 +144,8 @@ One incident pack (2026-03): a skills-coverage pack for a nine-person site would
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: work-not-workers principle, PII-classification review closed as four-tier field register with inference-resistance history check and worker-visibility rule, employment records excluded at the type level, structure-only recommendation rule, 3 domain metrics, worked round-trip |
 | 1.0.1 | 2026-08-01 | Repository Reviewer (prompt 07, AI) | Worker-visibility channel OQ struck (resolved by dot-design.md §7.1) |
+
+| 1.0.2 | 2026-08-01 | Repository Steward Agent | Linked to Dot.HR's own wiki.md (platform repo) as the platform-owned source of truth |
 
 ## Open Questions
 

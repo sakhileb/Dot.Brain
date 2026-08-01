@@ -1,6 +1,6 @@
 ---
 title: Dot.Farms — Platform Knowledge
-version: 1.0.0
+version: 1.0.1
 status: active
 owners: [Agriculture Platform Lead, Agriculture Agent, Registry Agent]
 platform-id: dot-farms
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.Farms
+
+> **Platform-owned source:** [Dot.Farms's wiki.md](https://github.com/sakhilebhayi/Dot.Farms/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -118,6 +120,8 @@ One incident pack (frost-window forecast miss, 2026-01) — lesson contributed t
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: entities, events, packs, consumed intelligence, value chain, tenancy, dopamine surface, 4 domain metrics registered, manifest, worked round-trip |
+
+| 1.0.1 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Farms's own wiki.md (platform repo) as the platform-owned source of truth |
 
 ## Open Questions
 

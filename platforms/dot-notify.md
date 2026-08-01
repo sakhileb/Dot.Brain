@@ -1,6 +1,6 @@
 ---
 title: Dot.Notify — Platform Knowledge
-version: 1.0.0
+version: 1.0.1
 status: active
 owners: [Notify Platform Lead, Documentation Agent, Registry Agent]
 platform-id: dot-notify
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.Notify
+
+> **Platform-owned source:** [Dot.Notify's wiki.md](https://github.com/sakhilebhayi/Dot.Notify/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -124,6 +126,8 @@ One incident pack (2026-02): a platform's alert class fired on a misconfigured t
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: delivery-domain ownership, domain-agent assignment gap closed (Documentation Agent, sprawl alternative rejected), Pulse cross-org consent scope resolved (default-off, role-addressed, degrade-to-digest), structural no-absence-trigger enforcement, attention-economics insight channel, 3 domain metrics, worked round-trip |
+
+| 1.0.1 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Notify's own wiki.md (platform repo) as the platform-owned source of truth |
 
 ## Open Questions
 

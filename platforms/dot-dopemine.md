@@ -1,6 +1,6 @@
 ---
 title: Dot.Dopemine — Platform Knowledge
-version: 1.0.1
+version: 1.0.2
 status: active
 owners: [Dopemine Platform Lead, Ethics Agent, Registry Agent]
 platform-id: dot-dopemine
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.Dopemine
+
+> **Platform-owned source:** [Dot.Dopemine's wiki.md](https://github.com/sakhilebhayi/Dot.Dopemine/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -134,6 +136,8 @@ One incident pack (2026-05): a pilot completion-streak mechanic on Dot.Tasks sho
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: inverted-strictness posture, catalog-level acid test (no consuming-platform escape hatch), prohibited-metric list published (registry gap closed) with mechanical enforcement, engagement-outcome pairing publication rule, self-decertification incident, 3 domain metrics, worked round-trip |
 | 1.0.1 | 2026-08-01 | Repository Reviewer (prompt 07, AI) | Intent-label wording OQ struck (resolved by dot-design.md §7.1) |
+
+| 1.0.2 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Dopemine's own wiki.md (platform repo) as the platform-owned source of truth |
 
 ## Open Questions
 

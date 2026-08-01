@@ -1,6 +1,6 @@
 ---
 title: Dot.Finance — Platform Knowledge
-version: 1.0.0
+version: 1.0.1
 status: active
 owners: [Finance Platform Lead, Finance Agent, Registry Agent]
 platform-id: dot-finance
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.Finance
+
+> **Platform-owned source:** [Dot.Finance's wiki.md](https://github.com/sakhilebhayi/Dot.Finance/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -154,9 +156,12 @@ Namespace note: `finproduct.*` is deliberately distinct from Billing's `finance.
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: three-way money boundary (settlement/instruments/products) drawn canonically, regulatory watch closed as a hosted service with versioned machine-checkable rule packs and gate-acknowledgment change control, three queued questions answered, individual credit data excluded at type level, `finproduct.*` namespace resolving the Billing prefix flag, 3 domain metrics, worked round-trip |
 
+| 1.0.1 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Finance's own wiki.md (platform repo) as the platform-owned source of truth |
+
 ## Open Questions
 
 | Question | Owner → Approver |
 |---|---|
 | Watch jurisdiction expansion: which jurisdictions beyond ZA at launch, and who funds monitoring per jurisdiction? | Finance Agent → Executive Sponsor |
 | Parametric triggers referencing platform data: do source platforms owe a data-quality SLA to Finance's products (per the 2026-05 incident), and in what contractual form? | Finance Agent → Chief Architect |
+| **Domain mismatch (flagged 2026-08-01):** Dot.Finance's actual repository implements a single-user personal-finance tracker (accounts, transactions, budgets) — not the financial-products/regulatory-watch platform this document describes. Needs human reconciliation before this doc's contents are treated as authoritative. See [Dot.Finance's wiki.md](https://github.com/sakhilebhayi/Dot.Finance/blob/main/wiki.md) for what's actually built. | Registry Agent → Chief Knowledge Engineer |

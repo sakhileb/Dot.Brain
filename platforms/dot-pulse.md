@@ -1,6 +1,6 @@
 ---
 title: Dot.Pulse — Platform Knowledge
-version: 1.0.2
+version: 1.0.3
 status: active
 owners: [Pulse Platform Lead, Community Agent, Registry Agent]
 platform-id: dot-pulse
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.Pulse
+
+> **Platform-owned source:** [Dot.Pulse's wiki.md](https://github.com/sakhilebhayi/Dot.Pulse/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -133,6 +135,8 @@ One incident pack (2026-04): a draft topic-signal pack included a community name
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: discussion-domain ownership, discussion-pack privacy review closed as five-gate mechanical contract, topic-signal packs as I4 early-warning channel, all five prohibited-list patterns withheld (standing outcome-mechanics-only test case), 3 domain metrics, worked round-trip |
 | 1.0.1 | 2026-08-01 | Repository Reviewer (prompt 07, AI) | Notify-consent OQ struck (resolved by dot-notify.md) |
 | 1.0.2 | 2026-08-01 | DKP Architect (prompt 02, AI) | Taxonomy OQ struck (schemas/taxonomy.json published) |
+
+| 1.0.3 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Pulse's own wiki.md (platform repo) as the platform-owned source of truth |
 
 ## Open Questions
 

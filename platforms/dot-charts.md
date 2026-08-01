@@ -1,6 +1,6 @@
 ---
 title: Dot.Charts — Platform Knowledge
-version: 1.0.1
+version: 1.0.2
 status: active
 owners: [Charts Platform Lead, Trading Agent, Registry Agent]
 platform-id: dot-charts
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.Charts
+
+> **Platform-owned source:** [Dot.Charts's wiki.md](https://github.com/sakhilebhayi/ChartSense/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -137,9 +139,12 @@ One incident pack (2026-04): a draft model-feature ingestion included a regional
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: trading-domain ownership, bidirectional compliance gate closed (inbound MNPI screen with instrument mapping, outbound disclosure and loss-honesty, dual-control config, append-only audit), position data excluded at type level, trading instantiations of prohibited patterns withheld, 3 domain metrics, worked round-trip |
 | 1.0.1 | 2026-08-01 | Repository Reviewer (prompt 07, AI) | Both OQs struck (instrument map joint ownership, retail defaults + Loop C comprehension — resolved by dot-finance.md and dot-design.md) |
 
+| 1.0.2 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Charts's own wiki.md (platform repo) as the platform-owned source of truth |
+
 ## Open Questions
 
 | Question | Owner → Approver |
 |---|---|
 | ~~Instrument-mapping maintenance: who owns the ecosystem-domain → listed-instrument map as listings change — Trading Agent alone or jointly with Finance's regulatory watch?~~ **Resolved 2026-08-01** by [dot-finance.md](dot-finance.md): joint ownership with the regulatory watch | Trading Agent → Security Officer |
+| **Naming discrepancy (flagged 2026-08-01):** this registry entry is `dot-charts`, but the actual GitHub repository is named `ChartSense` — github.com/sakhilebhayi/ChartSense. Registry should either rename the repo or record the alias formally. Also, the live codebase is early-stage (market-data aggregation, chart OCR, backtesting scaffolding) — SMC/ICT strategy builders and trading journals described here are not yet built; see [Dot.Charts's wiki.md](https://github.com/sakhilebhayi/ChartSense/blob/main/wiki.md). | Registry Agent → Chief Knowledge Engineer |
 | ~~Retail vs. institutional signal surfaces: same disclosure standards or stricter retail defaults? Coordinate with dot-finance's regulatory-watch session~~ **Resolved 2026-08-01** by [dot-finance.md](dot-finance.md): stricter retail defaults via the watch; disclosure comprehension measured per [dot-design.md](dot-design.md) §7.1 (Loop C — gate-passed but incomprehensible returns as a defect) | Trading Agent → Ethics Officer |

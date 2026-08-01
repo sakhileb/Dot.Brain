@@ -1,6 +1,6 @@
 ---
 title: Dot.Agents — Platform Knowledge
-version: 1.0.1
+version: 1.0.2
 status: active
 owners: [Agents Platform Lead, Colony Agent, Registry Agent]
 platform-id: dot-agents
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.Agents
+
+> **Platform-owned source:** [Dot.Agents's wiki.md](https://github.com/sakhilebhayi/Dot.Agents/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -146,6 +148,8 @@ One incident pack (2026-03): a retry loop on a failing tool call consumed a clas
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: runtime/knowledge layer separation, colony runtime contract closed (four bounds: resource, context, escalation, audit; `runc:provisional` default for uncharted agents), five domain-agent assignments recorded for brain.agents.md promotion (four charters pending — operational escalation), 3 domain metrics, worked round-trip |
 | 1.0.1 | 2026-08-01 | Agent Colony Architect (prompt 04, AI) | §7.1 escalation cleared: four charters authored (ADR-0010); charter-authoring OQ struck |
+
+| 1.0.2 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Agents's own wiki.md (platform repo) as the platform-owned source of truth |
 
 ## Open Questions
 

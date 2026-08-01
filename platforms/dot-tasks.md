@@ -1,6 +1,6 @@
 ---
 title: Dot.Tasks — Platform Knowledge
-version: 1.0.0
+version: 1.0.1
 status: active
 owners: [Tasks Platform Lead, Delivery Agent, Registry Agent]
 platform-id: dot-tasks
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.Tasks
+
+> **Platform-owned source:** [Dot.Tasks's wiki.md](https://github.com/sakhilebhayi/Dot.Tasks/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -124,6 +126,8 @@ Two entries: (2026-05, shared with dopemine) the completion-streak decertificati
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: routine-granularity ownership deferring to dot-projects boundary statement, execution-substrate role and outcome-evidence seam, done/rework pairing made structural (decertified-streak lesson), open-classified template structures, 3 domain metrics, worked round-trip corroborating the canonical Mines outcome |
+
+| 1.0.1 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Tasks's own wiki.md (platform repo) as the platform-owned source of truth |
 
 ## Open Questions
 

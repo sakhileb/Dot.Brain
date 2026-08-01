@@ -1,6 +1,6 @@
 ---
 title: Dot.Memory — Platform Knowledge
-version: 1.0.0
+version: 1.0.1
 status: active
 owners: [Memory Platform Lead, Memory Agent, Registry Agent]
 platform-id: dot-memory
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.Memory
+
+> **Platform-owned source:** [Dot.Memory's wiki.md](https://github.com/sakhilebhayi/Dot.Memory/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -135,6 +137,7 @@ The two stragglers were proposed in brain.memory.md before any platform doc exis
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: infrastructure/platform layer separation (stores without reading; telemetry-only publication by construction), retrieval SLA contract closed (four classes with specified degraded modes, SRE-owned, consumer-acknowledged), brain.memory.md straggler metrics homed, Central two-lane layering clarified, 3 domain metrics, worked round-trip |
+| 1.0.1 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Memory's own wiki.md (platform repo) as the platform-owned source of truth |
 
 ## Open Questions
 

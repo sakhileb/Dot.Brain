@@ -1,6 +1,6 @@
 ---
 title: Dot.Analytics — Platform Knowledge
-version: 1.0.1
+version: 1.0.2
 status: active
 owners: [Analytics Platform Lead, Analytics Agent, Registry Agent]
 platform-id: dot-analytics
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.Analytics
+
+> **Platform-owned source:** [Dot.Analytics's wiki.md](https://github.com/sakhilebhayi/Dot.Analytics/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -126,6 +128,8 @@ The value chain's final link — the view that makes the first three links visib
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: reporting-domain ownership (composes, never re-measures), KPI-catalog sync contract (registry gap closed), agri chain view as delegated Analytics product, inherited-provenance rule for insight packs, strictest-source floor inheritance, 3 domain metrics, worked round-trip |
 | 1.0.1 | 2026-08-01 | Repository Reviewer (prompt 07, AI) | Rendering-path OQ reworded (Charts misattribution corrected) and struck (resolved by dot-design.md §7.1) |
+
+| 1.0.2 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Analytics's own wiki.md (platform repo) as the platform-owned source of truth |
 
 ## Open Questions
 

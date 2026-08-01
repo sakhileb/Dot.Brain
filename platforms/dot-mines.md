@@ -1,6 +1,6 @@
 ---
 title: Dot.Mines — Platform Knowledge
-version: 1.0.1
+version: 1.0.2
 status: active
 owners: [Mining Platform Lead, Mining Agent, Registry Agent]
 platform-id: dot-mines
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.Mines
+
+> **Platform-owned source:** [Dot.Mines's wiki.md](https://github.com/sakhilebhayi/mines/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -122,9 +124,12 @@ The canonical thread, restated as the test fixture:
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: entities, events, packs, consumed intelligence, Central loop, tenancy with sub-tenants, dopamine surface with withheld-leaderboard decision, 4 domain metrics registered, manifest, canonical round-trip |
 | 1.0.1 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Loop-latency OQ resolved: canonical two-lane contract lives in dot-central.md §6 |
 
+| 1.0.2 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Mines's own wiki.md (platform repo) as the platform-owned source of truth |
+
 ## Open Questions
 
 | Question | Owner → Approver |
 |---|---|
 | ~~Dot.Central shares the Mining domain agent — does the Mines↔Central loop need its own latency contract in both platform docs, or one canonical statement in dot-central.md?~~ Resolved 2026-08-01: one canonical statement in [dot-central.md](dot-central.md) §6 (two-lane contract); this doc defers there | Registry Agent → Chief Knowledge Engineer |
+| **Naming discrepancy (flagged 2026-08-01):** this registry entry is `dot-mines`, but the actual GitHub repository is named `mines` (no `Dot.` prefix) — github.com/sakhilebhayi/mines. Registry should either rename the repo or record the alias formally. | Registry Agent → Chief Knowledge Engineer | Registry Agent → Chief Knowledge Engineer |
 | Contractor sub-tenant floor: is n ≥ 20 right for small contractor pools, or does it need the Dot.HR-style stricter review? | Security Agent → Security Officer |

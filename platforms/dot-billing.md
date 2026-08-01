@@ -1,6 +1,6 @@
 ---
 title: Dot.Billing — Platform Knowledge
-version: 1.0.0
+version: 1.0.1
 status: active
 owners: [Billing Platform Lead, Finance Agent, Registry Agent]
 platform-id: dot-billing
@@ -10,6 +10,8 @@ last-review: 2026-08-01
 ---
 
 # Dot.Billing
+
+> **Platform-owned source:** [Dot.Billing's wiki.md](https://github.com/sakhilebhayi/Dot.Billing/blob/main/wiki.md) — the platform's own knowledge home. This document is Dot.Brain's ingested view; the wiki is authoritative for what the platform actually is.
 
 ## 1. Purpose & Business Domain
 
@@ -135,6 +137,8 @@ The value chain's third link, closed:
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: settlement-domain ownership, seam-metric canonical statement, two-tier aggregation-floor configuration (registry gap closed, manifest-enforced), restricted-by-default classification, minimal dopamine surface by policy, 3 domain metrics, worked round-trip |
+
+| 1.0.1 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Billing's own wiki.md (platform repo) as the platform-owned source of truth |
 
 ## Open Questions
 
