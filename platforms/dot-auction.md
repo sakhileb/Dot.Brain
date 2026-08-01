@@ -148,4 +148,5 @@ One incident pack (2026-04): a draft observation pack included per-lot bid count
 | Question | Owner → Approver |
 |---|---|
 | ~~Lot categories via shared taxonomy — fourth consumer waiting on schemas/taxonomy.json (with Emall, semantic, Pulse)~~ **Resolved 2026-08-01:** [schemas/taxonomy.json](../schemas/taxonomy.json) published; `auction.lot.category` frozen | Knowledge Agent → Chief Knowledge Engineer |
+| **Flagged 2026-08-01:** sealed-bid/procurement disclosure rules were assumed to come from Dot.Finance's regulatory watch — that watch turned out not to exist (see [dot-finance.md](dot-finance.md) §12). Disclosure-rule sourcing needs a new owner. | Registry Agent → Chief Knowledge Engineer |
 | ~~Sealed-bid tender data for public-sector procurement: does regulatory disclosure law override the reserve-confidentiality gate? Coordinate with dot-finance's regulatory watch~~ **Resolved 2026-08-01** by [dot-finance.md](dot-finance.md): governed by jurisdiction rule packs (`reg:<jurisdiction>:<domain>:<rule>`) under the regulatory watch | Security Agent → Security Officer |

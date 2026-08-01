@@ -1,11 +1,11 @@
 ---
 title: Dot.Finance — Platform Knowledge
-version: 1.0.1
+version: 2.0.0
 status: active
 owners: [Finance Platform Lead, Finance Agent, Registry Agent]
 platform-id: dot-finance
 dkp-version: 1.0.0
-integration-status: publishing
+integration-status: registered
 last-review: 2026-08-01
 ---
 
@@ -15,153 +15,90 @@ last-review: 2026-08-01
 
 ## 1. Purpose & Business Domain
 
-Financial products and services: credit and lending, insurance products, savings instruments, and financial-product design for ecosystem participants (from smallholder harvest credit to fleet asset financing). Owns the financial-products domain, and hosts the ecosystem's **regulatory watch** (registry gap, closed in §7) — the shared function that tracks financial-services, market-conduct, and disclosure regulation and translates it into machine-checkable rules other platforms' gates consume. Three requests were already queued against it before this document existed: Auction's sealed-bid disclosure question, and Charts' instrument-map ownership and retail-disclosure questions — evidence the function was needed before it was built.
+Personal finance tracking for individual ecosystem users: accounts, categorized transactions, and budgets. A user connects or records their accounts, transactions are tagged by category, and budgets track spend against a period. This is materially smaller in scope than earlier revisions of this document assumed — see §12 for what changed and why.
 
-**The three-way money boundary,** drawn once, canonically:
-
-| Platform | Owns | Test question |
-|---|---|---|
-| Dot.Billing | *Settlement* — money movement for things already agreed (orders, payouts, subscriptions) | "Is money moving because of a completed transaction?" |
-| Dot.Charts | *Traded instruments* — signals and execution on public markets | "Is this an exchange-traded position?" |
-| Dot.Finance | *Financial products* — credit, insurance, savings: contracts that create future obligations | "Does this create a new obligation or risk transfer?" |
-
-Composites split along the same lines: a margin-lending product is Finance's (credit), consuming Charts' exposure aggregates; loan *disbursement* is a Billing settlement; crop insurance is Finance's product even when its trigger data comes from Farms.
+**Superseded scope note:** version 1.x of this document described Dot.Finance as the ecosystem's financial-products platform (credit, insurance, savings) and the host of a shared "regulatory watch" service consumed by Dot.Charts, Dot.Auction, Dot.Billing, and Dot.HR. Neither exists in the actual codebase. That content is preserved in this file's git history, not carried forward — treat it as an unbuilt design, not a deprecated feature. §12 tracks the resulting ripple: the regulatory watch's former subscribers each need their own reconciliation.
 
 ## 2. Entities Owned
 
 | Entity | Graph node type | Natural key | Notes |
 |---|---|---|---|
-| Product definition | `entity:asset` | product ID | Terms structure, not customer instances |
-| Credit facility (aggregate class) | `entity:asset` | product × segment | Portfolio-level; individual accounts never graphed |
-| Insurance product | `entity:asset` | product ID | Incl. parametric triggers referencing platform data |
-| Regulatory rule | `entity:asset` | `reg:<jurisdiction>:<domain>:<rule>` | The watch's output — versioned, machine-checkable |
-| Portfolio observation | `observation` | product × segment × window | n ≥ 100, quarterly (Billing's dunning-tier discipline) |
-| Product outcome | `outcome` | product + period | Repayment/claims performance vs. design assumptions |
-| Customer account / application | — | — | **Never graphed.** Creditworthiness data is `prohibited`-tier (HR §7 pattern); individual credit decisions never touch the Brain |
+| Account | `entity:asset` | account ID | A tracked financial account (bank, cash, card) |
+| Transaction | `observation` | transaction ID | A single categorized inflow/outflow on an account |
+| Category | `entity:asset` | category ID | User-defined or default transaction categorization |
+| Budget | `entity:asset` | budget ID + period | Spend ceiling per category per period |
+
+Notably absent versus prior scope: no credit facility, insurance product, or regulatory-rule entities — none of that domain is implemented. No aggregate/portfolio entities either; today's model is single-account, single-user.
 
 ## 3. Events Emitted
 
-| Event | Trigger | Consumers | Frequency |
-|---|---|---|---|
-| `finproduct.product.launched/retired` | Product lifecycle | Brain, Dot.Analytics | low |
-| `finproduct.regwatch.rule_updated` | Regulatory-watch rule change | **Subscribing gates: Charts, Auction, Billing, HR** | low, priority delivery |
-| `finproduct.parametric.triggered` | Parametric insurance trigger fires | Brain, affected product holders via Notify | rare |
+None. No domain events are dispatched in the current codebase — transactions and budget changes are persisted directly with no event bus integration. **Roadmap**, not shipped.
 
 ## 4. Knowledge Packs Published
 
-| Payload type | Cadence | Example pack ID |
-|---|---|---|
-| observation (portfolio-performance aggregates) | quarterly | `dkp:finance:obs:2026-07-01:0003` |
-| insight (product-fit findings) | per finding | `dkp:finance:ins:2026-06-08:0001` |
-| outcome (recommendation verifications) | per verified recommendation | `dkp:finance:out:2026-07-30:0001` |
-| incident (regulatory events, product failures) | per incident | `dkp:finance:inc:2026-05-20:0001` |
-
-Default classification `restricted` (Billing's rationale, amplified: credit-portfolio patterns are competitively and personally sensitive). Regulatory-rule packs are the exception — `ecosystem`, because a compliance rule that isn't distributed is a liability.
+None. There is no DKP manifest, no signing key, and no publishing pipeline in this repository. Dot.Finance is `registered` in name only — it has not published a single pack.
 
 ## 5. Intelligence Consumed
 
-| Recommendation type | Metric expected to move | Baseline |
-|---|---|---|
-| Product-fit suggestions (which product structures fit which segments — e.g. harvest-cycle-aligned repayment schedules from Farms' seasonal data) | `finproduct.repayment_on_schedule_rate` | 2026 H1 |
-| Parametric-trigger calibration (platform data as insurance triggers — rainfall indices from Farms, corridor disruption from Ehail) | `finproduct.parametric_basis_gap` | per product |
-| Portfolio-risk regime alerts (aggregate, segment-level) | `finproduct.portfolio_at_risk_rate` | 2026 H1 |
-
-Consumption rule inherited from HR/Billing: recommendations target product *structures* and segment terms, never individual credit decisions — "align repayment schedules to harvest cycles for this segment" is valid; any form of individual scoring input is rejected at the manifest.
+None currently subscribed.
 
 ## 6. Cross-Platform Relationships
 
 ```mermaid
 flowchart LR
-    FI[Dot.Finance regulatory watch] -->|rule packs| G[Gates: Charts, Auction, Billing, HR]
-    FA[Dot.Farms rainfall/yield aggregates] -->|parametric triggers| FI
-    FI -->|disbursements & premiums as settlements| BI[Dot.Billing]
-    C[Dot.Charts exposure aggregates] -->|margin-product inputs| FI
-    FI -->|product performance packs| B[Brain]
+    U[Individual user] -->|records| FI[Dot.Finance: accounts, transactions, budgets]
 ```
 
-Answers to the queued questions: **(Auction)** sealed-bid public-procurement disclosure is jurisdiction-specific — the watch maintains it as `reg:<jurisdiction>:procurement:disclosure` rules that Auction's gate consumes; where disclosure law applies, it overrides reserve confidentiality and the lot is flagged at consignment, before bidding. **(Charts, instrument map)** joint ownership: the watch owns the regulatory feed of listings/delistings; the Trading Agent owns materiality mapping — split along expertise, wired as one signed artifact. **(Charts, retail disclosure)** stricter retail defaults, maintained as watch rules so they update with conduct regulation rather than by platform initiative.
+Dot.Finance is currently an isolated, single-user application with no ecosystem integration. It does not consume Farms' rainfall data, does not host a regulatory watch, and is not wired to Billing, Charts, Auction, or HR. Every cross-platform relationship in the prior version of this document was aspirational.
 
-## 7. Tenancy Model & Regulatory-Watch Setup (registry gap closed)
+## 7. Tenancy Model
 
-Tenant key = institution/org; portfolio floors n ≥ 100, quarterly (financial-distress-adjacent data). The **regulatory watch**, wired:
-
-| Element | Design |
-|---|---|
-| Scope | Financial-services, market-conduct, disclosure, and procurement regulation across operating jurisdictions; explicitly *not* domain safety regs (mining/agri safety stay with their platforms) |
-| Output | Versioned, machine-checkable rule packs (`reg:<jurisdiction>:<domain>:<rule>`), signed and `ecosystem`-classified |
-| Subscribers | Any platform gate; current: Charts (MNPI/disclosure), Auction (procurement), Billing (payments regulation), HR (labour-law overlaps, via its POPIA/GDPR tier mapping) |
-| Cadence | Continuous monitoring; rule updates as priority events; quarterly attestation that the ruleset is current, signed by the Security Officer |
-| Change control | New/changed rules take effect only after the affected platform's gate acknowledges the version — no silent rule swaps under a running gate |
-| Escalation | A regulation the ruleset cannot express machine-checkably becomes a governance OQ, not a silent judgment call |
-
-The watch is a *service* Finance hosts, not knowledge Finance owns: rules cite their statutory source, and disputes route to the Security Officer, not the Finance lead.
+Single-user, not multi-tenant. Each account/transaction/budget belongs to one user, with no organization or team scoping layer — a departure from the org-tenant pattern used elsewhere in the ecosystem (e.g. Billing, HR). If Dot.Finance grows toward the ecosystem's registered platform norms, tenancy will likely need to move to an org-scoped model; tracked as an open question in §13.
 
 ## 8. Dopamine Surface
 
-Credit and engagement mechanics are a predatory combination — spend-milestone rewards, credit-utilization gamification, borrow-again nudges are the prohibited list's financial instantiations plus a conduct-regulation exposure. All withheld, including savings streaks: even virtuous-seeming streak mechanics fail the loss-framing test when the underlying behavior is financial. Shared: product-level performance honesty (repayment and claims rates with adverse periods included — the loss-honesty rule generalized from Charts) and parametric-trigger transparency (holders can always see the index their product references, and the trigger's intent label is the product contract itself).
+Budget-vs-actual visibility only (a category over/under its period budget). No gamification, no streaks, no rewards mechanics exist or are planned by default — the manifesto's prohibition on financial engagement mechanics (spend milestones, utilization gamification, borrow-again nudges) applies here as a hard constraint on any future feature, not a description of anything currently in scope.
 
 ## 9. Active Recommendations
 
-Maintained by the Registry Agent. Current: product-fit `verified` — see §13; parametric-trigger calibration for a corridor-disruption courier product `open` (expiry 2026-09-25).
+None. No Knowledge Packs have been published, so the Registry Agent has nothing to act on.
 
 ## 10. Incident History Summary
 
-One incident pack (2026-05): a parametric crop-insurance trigger referenced a Farms rainfall index whose station coverage had degraded — basis-gap widened and two payouts misfired (one over, one under); published with both directions disclosed; lesson: trigger indices carry data-quality SLAs and the `finproduct.parametric_basis_gap` metric was created from this incident. Consumed: Billing's corridor-outage lesson; Charts' instrument-mapping near-miss (direct input to the joint-ownership design in §6).
+None recorded. The single incident described in the prior version of this document (a parametric crop-insurance basis-gap) belonged to the unbuilt financial-products domain and has been removed along with it — no such trigger, product, or incident exists.
 
-## 11. Domain Metrics (registered per brain.metrics.md §4.8)
+## 11. Domain Metrics
 
-| ID | Type | Definition |
+None registered. The `finproduct.*` metrics defined in the prior version of this document (`finproduct.repayment_on_schedule_rate`, `finproduct.parametric_basis_gap`, `finproduct.regwatch_ack_latency_p95`) measured a domain that doesn't exist in code; they are retracted, not renamed. If a personal-finance metric set is wanted (e.g. budget-adherence rate), it should be proposed fresh against what's actually built.
+
+## 12. What Changed From v1.x, and Its Ripple
+
+This document was rewritten 2026-08-01 after comparing it against Dot.Finance's actual repository (see [wiki.md](https://github.com/sakhilebhayi/Dot.Finance/blob/main/wiki.md)) and finding the two described unrelated products: v1.x's financial-products/regulatory-watch platform versus the shipped personal-finance tracker. Per human decision, this document was brought in line with reality (option b) rather than treating the gap as a build backlog for this platform (option a).
+
+**Orphaned dependencies — each needs its own reconciliation, not fixed here:**
+
+| Dependent | What it assumed from Dot.Finance | Status |
 |---|---|---|
-| `finproduct.repayment_on_schedule_rate` | ratio | Scheduled repayments met / due, per product × segment, quarterly |
-| `finproduct.parametric_basis_gap` | ratio | Parametric payouts diverging from actual-loss assessment beyond tolerance / triggers fired |
-| `finproduct.regwatch_ack_latency_p95` | duration | Rule update published to subscriber-gate acknowledgment, p95 — the watch's own health metric |
+| [dot-charts.md](dot-charts.md) §6/§13 | Joint ownership of the compliance/MNPI gate and instrument-mapping regulatory feed, via the regulatory watch | Broken — Charts' compliance gate has no regulatory-rule source. Needs its own review. |
+| [dot-auction.md](dot-auction.md) | Sealed-bid/procurement disclosure rules sourced from the regulatory watch | Broken — same cause. |
+| [dot-billing.md](dot-billing.md) | `finproduct.*` vs `finance.*` metric-namespace coordination with Dot.Finance | Moot — `finproduct.*` no longer exists; no coordination needed, but Billing's doc still references it. |
 
-Namespace note: `finproduct.*` is deliberately distinct from Billing's `finance.*` — the prefix coordination flagged at Billing's session, resolved by giving the later platform the new prefix.
+Checked and *not* affected: `brain.governance.md` and `dot-hr.md` do not reference Dot.Finance's regulatory watch — no cross-reference to fix there.
 
-## 12. Manifest (platform.dkp.json example)
-
-```json
-{
-  "platform_id": "dot-finance",
-  "dkp_version": "1.0.0",
-  "signing_key_ref": "vault://keys/dot-finance/dkp-signing/v1",
-  "publishes": ["observation", "insight", "outcome", "incident", "regulatory-rule"],
-  "subscribes": ["product-fit", "parametric-trigger-calibration", "portfolio-risk-alert"],
-  "schemas": { "knowledge-pack": "1.0.0", "metric": "1.0.0" },
-  "default_classification": "restricted",
-  "classification_overrides": [{ "payload": "regulatory-rule", "classification": "ecosystem" }],
-  "tenancy": {
-    "key": "org_id",
-    "aggregation_floor": 100,
-    "min_window": "quarter",
-    "publication_rules": [
-      { "rule": "no-individual-credit-data", "enforcement": "reject-at-ingestion" },
-      { "rule": "structure-only-recommendations", "applies_to": "inbound-recommendations", "enforcement": "reject" },
-      { "rule": "regwatch-version-acknowledgment", "enforcement": "block-rule-activation" }
-    ]
-  }
-}
-```
-
-## 13. Worked round-trip
-
-1. **Pack:** `dkp:finance:obs:2026-07-01:0003` — repayment aggregates for smallholder seasonal credit, Northern Cape agri segment, n = 460 accounts: fixed-monthly products underperforming (0.71 on-schedule) against the segment's income seasonality.
-2. **Validation → graph:** `OBSERVED_WITH` edge between repayment-schedule shape and Farms' harvest-cashflow timing (the payout-cycle thread from Billing §5), 0.73; corroborated by Billing's payout-timing aggregates (×1.10 → 0.80).
-3. **PR back (product-fit):** offer a harvest-aligned repayment variant (grace through planting, stepped payments post-harvest) for the segment; confidence 0.80, impact `finproduct.repayment_on_schedule_rate` +12% predicted, guards: portfolio-at-risk flat, no term-cost increase to borrowers (an ethics guard — better repayment must not be priced as worse credit), expiry 120 days (one season).
-4. **Outcome:** `dkp:finance:out:2026-07-30:0001` — early-cohort on-schedule rate 0.86 vs. 0.71 baseline, both guards held; full-season verification pending expiry. The chain now runs the value loop end to end in *money terms*: Farms' seasonality → Billing's payout timing → Finance's product design → measurably better repayment without extracting more from the borrower.
+This document does not resolve those four; each owning platform should re-review its own doc against this change during its next touch.
 
 ## Change Log
 
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: three-way money boundary (settlement/instruments/products) drawn canonically, regulatory watch closed as a hosted service with versioned machine-checkable rule packs and gate-acknowledgment change control, three queued questions answered, individual credit data excluded at type level, `finproduct.*` namespace resolving the Billing prefix flag, 3 domain metrics, worked round-trip |
-
 | 1.0.1 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Finance's own wiki.md (platform repo) as the platform-owned source of truth |
+| 2.0.0 | 2026-08-01 | Repository Steward Agent (human-directed reconciliation) | Full rewrite to match the actual repository: replaced the financial-products/regulatory-watch platform description with the real personal-finance tracker (accounts, transactions, categories, budgets); retracted `finproduct.*` metrics and the regulatory watch; documented the resulting orphaned dependencies in Charts, Auction, Billing, and governance/HR docs (§12) |
 
 ## Open Questions
 
 | Question | Owner → Approver |
 |---|---|
-| Watch jurisdiction expansion: which jurisdictions beyond ZA at launch, and who funds monitoring per jurisdiction? | Finance Agent → Executive Sponsor |
-| Parametric triggers referencing platform data: do source platforms owe a data-quality SLA to Finance's products (per the 2026-05 incident), and in what contractual form? | Finance Agent → Chief Architect |
-| **Domain mismatch (flagged 2026-08-01):** Dot.Finance's actual repository implements a single-user personal-finance tracker (accounts, transactions, budgets) — not the financial-products/regulatory-watch platform this document describes. Needs human reconciliation before this doc's contents are treated as authoritative. See [Dot.Finance's wiki.md](https://github.com/sakhilebhayi/Dot.Finance/blob/main/wiki.md) for what's actually built. | Registry Agent → Chief Knowledge Engineer |
+| Dot.Charts, Dot.Auction, Dot.Billing, and the governance/HR regulatory overlap each assumed Dot.Finance's regulatory watch — who now owns that function, if anyone: rebuild it here, home it elsewhere, or drop the dependency from each? | Registry Agent → Chief Knowledge Engineer |
+| Should Dot.Finance move to org-scoped tenancy to match the ecosystem norm, or stay single-user and accept it may never register real Knowledge Packs under the current DKP tenancy model? | Finance Platform Lead → Chief Architect |
+| Is a personal-finance tracker in scope for this ecosystem's platform roster at all, or should Dot.Finance's registry entry be retired and the "financial platform" niche re-opened for a future build? | Registry Agent → Executive Sponsor |

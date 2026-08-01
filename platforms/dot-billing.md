@@ -145,4 +145,5 @@ The value chain's third link, closed:
 | Question | Owner → Approver |
 |---|---|
 | `restricted`-to-`ecosystem` derivative re-publication: does the Security gate need a standing checklist for Billing derivatives, or per-pack review at current volumes? | Security Agent → Security Officer |
+| **Moot 2026-08-01:** the `finance.*` vs `finproduct.*` metric-namespace coordination with Dot.Finance no longer applies — `finproduct.*` was retracted when Dot.Finance's doc was rewritten to match its actual (much smaller) scope; see [dot-finance.md](dot-finance.md) §12. No action needed, noted for anyone tracing the old coordination. | — |
 | Dunning floor (n ≥ 100, quarterly) — validate against POPIA/GDPR guidance once the legal-identity open question (brain.identity.md) resolves | Security Agent → Security Officer |
