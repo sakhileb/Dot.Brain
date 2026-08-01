@@ -1,6 +1,6 @@
 ---
 title: Dot.Brain Master Navigation Index
-version: 1.0.0
+version: 1.1.0
 status: active
 owners: [Chief Intelligence Architect, Repository Steward Agent]
 last-review: 2026-08-01
@@ -49,14 +49,16 @@ Purpose: persona-based navigation for the entire Dot.Brain repository, so any re
 1. [../README.md](../README.md) — start here
 2. [../MANIFESTO.md](../MANIFESTO.md) — the principles
 3. [GLOSSARY.md](GLOSSARY.md) — the vocabulary
-4. [../brain.operating_model.md](../brain.operating_model.md) — how humans and agents work together
-5. [../templates/](../templates/) — how to write anything here
-6. [../adr/ADR-0001-repository-structure.md](../adr/ADR-0001-repository-structure.md) — why it's shaped this way
+4. [../os/01-Executive-Vision.md](../os/01-Executive-Vision.md) — what the whole ~20-platform ecosystem is, one level above Dot.Brain itself
+5. [../brain.operating_model.md](../brain.operating_model.md) — how humans and agents work together within Dot.Brain
+6. [../templates/](../templates/) — how to write anything here
+7. [../adr/ADR-0001-repository-structure.md](../adr/ADR-0001-repository-structure.md) · [../adr/ADR-0012-ecosystem-operating-system-layer.md](../adr/ADR-0012-ecosystem-operating-system-layer.md) — why it's shaped this way
 
 ## Full Document Catalog (by domain group)
 
 | Group | Documents |
 |---|---|
+| Ecosystem Operating System | [os/](../os/README.md) — 20 docs + Appendix, one level above brain.*.md; ecosystem-wide doctrine, not Dot.Brain-internal |
 | Identity & Direction | brain.identity, brain.vision, brain.future, MANIFESTO |
 | Architecture | brain.architecture, brain.patterns, brain.api, brain.events, brain.workflows, adr/ |
 | Intelligence | brain.reasoning, brain.learning, brain.memory, brain.semantic, brain.recommendations, brain.evolution, brain.experiments |
@@ -73,6 +75,7 @@ Purpose: persona-based navigation for the entire Dot.Brain repository, so any re
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Repository Architect (prompt 01) | Initial persona-based navigation index |
+| 1.1.0 | 2026-08-01 | Repository Steward Agent | Added os/ (Ecosystem Operating System) to New Contributor path and Full Document Catalog |
 
 ## Open Questions
 

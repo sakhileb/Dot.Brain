@@ -1,6 +1,6 @@
 ---
 title: Dot.Brain — Repository Root
-version: 1.1.1
+version: 1.2.0
 status: active
 owners: [Chief Intelligence Architect, Repository Steward Agent]
 last-review: 2026-08-01
@@ -60,6 +60,7 @@ flowchart LR
 ```mermaid
 flowchart TD
     R[README.md] --> M[MANIFESTO.md]
+    R --> OS[os/ — Ecosystem Operating System, 20 docs + Appendix]
     R --> IDX[indexes/ — INDEX · GLOSSARY · CROSSREF]
     R --> CORE[brain.*.md — 33 core domain documents]
     R --> ADR[adr/ — Architecture Decision Records]
@@ -69,7 +70,9 @@ flowchart TD
     IDX --> CORE
     CORE --> ADR
     PLT --> SCH
+    OS --> CORE
 ```
+*`os/` sits one level above `brain.*.md`: ecosystem-wide operating doctrine (how ~20 platforms are built, secured, owned) versus Dot.Brain's own detailed technical specification. See [os/README.md](os/README.md).*
 *Every document is reachable within two clicks of this README — directly, or via `indexes/INDEX.md`.*
 
 ## Annotated Repository Tree
@@ -80,6 +83,7 @@ Format: `path — purpose · owner (Agent Colony) · primary consumers`
 dot-brain/
 ├── README.md                        # Entry point & boundary definition · Repository Steward Agent · everyone
 ├── MANIFESTO.md                     # Canonical Dot Intelligence Manifesto · Governance Agent · everyone
+├── os/                               # Ecosystem Operating System — 20 docs + Appendix, one level above brain.*.md · Repository Steward Agent · owner, all AI agents
 ├── brain.identity.md                # What the brain is, mission, scope · Governance Agent · executives, new contributors
 ├── brain.architecture.md            # System architecture & component model · Architecture Agent · platform engineers
 ├── brain.vision.md                  # 20-year vision & roadmap horizons · Governance Agent · executives
@@ -221,6 +225,7 @@ Followed by a one-paragraph purpose statement and a "Related documents" cross-li
 | 1.0.0 | 2026-08-01 | Repository Architect (prompt 01) | Initial repository structure, ownership matrix, contribution rules |
 | 1.1.0 | 2026-08-01 | Repository Architect + Agent Colony Architect (prompts 01+04, joint) | F-03: reconciled ownership matrix and tree annotations with the 24-agent roster in brain.agents.md; removed phantom agents (Identity, DKP, Graph, Colony, Analytics, Metrics, Design, Semantic, Telemetry, API, Search, Event, Workflow, Recommendation, Experiment, Ethics) |
 | 1.1.1 | 2026-08-01 | Repository Reviewer (prompt 07, AI) | Ownership matrix: domain-agent co-ownership of platform docs noted (28-agent roster per ADR-0010) |
+| 1.2.0 | 2026-08-01 | Repository Steward Agent | Added `os/` — the Ecosystem Operating System document set (see ADR-0012); repository map and annotated tree updated to reference it |
 
 ## Open Questions
 
