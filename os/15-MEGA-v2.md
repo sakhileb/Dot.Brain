@@ -1,6 +1,6 @@
 ---
 title: Dot Ecosystem — MEGA v2 (Composite Platform Scoring Model)
-version: 2.2.0
+version: 2.3.0
 status: active
 owners: [Sakhile Bhayi]
 last-review: 2026-08-01
@@ -72,7 +72,7 @@ Built from an empty scaffold this session by copying Dot.Billing's real Jetstrea
 | Dot.Plug | 2 | 2 | 2 | 2 | 0 | 8 | Certification gate and team-scoped install/uninstall verified directly in the controller. |
 | Dot.Dopemine | 2 | 2 | 2 | 2 | 0 | 8 | The manifesto's ethics constraint enforced at three independent layers (closed enum, action-level check, model `saving` listener) — verified line-by-line, the strongest engineering of this group. |
 | Dot.Farms | 2 | 2 | 2 | 2 | 0 | 8 | `FarmPolicy` verified across every child-resource controller; the one resource without by-ID routes (Crop) confirmed to have no cross-team surface at all. |
-| Dot.HR | 2 | 2 | 2 | 2 | 0 | 8 | **Pass 2:** the top-priority gap is closed — `create`/`update`/`delete` on Employee/LeaveRequest/Position now require the team's `admin` role, not just membership; `view` stays open team-wide. Covered by a new role-gating test block. |
+| Dot.HR | 2 | 2 | 2 | 2 | 0 | 8 | **Pass 2** claimed the top-priority gap closed; **pass 3 (real execution, 2026-08-02) found the fix had never actually taken effect** — `$this->authorize()` was undefined on the base controller, so every check 500'd instead of denying. Fixed and re-verified for real (19/19 `HrAuthorizationTest` cases pass) — `S=2` now reflects a genuinely executed, passing test suite, not a reviewed-but-untested claim. See [os/13-Engineering-State.md](13-Engineering-State.md) §4b. |
 
 **Mean of these 5: 8.0 / 10** (up from 7.8 after pass 2).
 
@@ -116,6 +116,7 @@ The picture has changed materially since pass 1 — four of the five signals bel
 | 2.0.0 | 2026-08-02 | Sakhile Bhayi | **Re-derived after the second pass across all 20 platforms.** All five `S=1` platforms re-scored `S=2` after a dedicated deep-security pass (3 real bugs found and fixed, 2 confirmed clean). Dot.Notify's `E` moved 1→2 (webhook built). Dot.HR's `S` moved 1→2 (role-gating closed). Every platform now scores 8/10 — the ecosystem mean is a flat 8.0, with `I=0` as the only remaining gap anywhere. §5 rewritten to reflect that four of five prior signals are now resolved. |
 | 2.1.0 | 2026-08-02 | Sakhile Bhayi | **Scored the 7 newly-discovered platforms** (§4a): Dot.Files, Dot.Docs, Dot.Forms, Dot.Sheet, Dot.Engage, Dot.Press, Dot.Tutor — mean 7.71/10, two real named gaps left open (Dot.Forms' SSRF hardening, Dot.Tutor's missing booking UI). Recomputed ecosystem mean across all 27 platform apps: 7.93/10. §5 gained a 6th signal for these two new gaps. |
 | 2.2.0 | 2026-08-02 | Sakhile Bhayi | **Both §4a gaps closed same day.** Dot.Forms `S` 1→2 (SSRF guard shipped), Dot.Tutor `E` 1→2 (booking flow built). §4a mean 7.71→8.0; ecosystem mean across all 27 platform apps 7.93→8.0, now flat with the other 20. §5 signal 6 marked resolved. |
+| 2.3.0 | 2026-08-02 | Sakhile Bhayi | **Dot.HR's `S=2` corrected from a review-based to an execution-based score.** All 5 hand-authored platforms ran for real for the first time; Dot.HR's pass-2 role-gating fix (the specific finding this score was based on) turned out to have never actually taken effect — every `$this->authorize()` call 500'd rather than denying, because the base controller was missing a required trait. Fixed and re-verified for real; the score stays `S=2` but the row now states plainly that it reflects a genuinely passing test suite, not a reviewed-but-untested claim. No numeric change — see [os/13-Engineering-State.md](13-Engineering-State.md) §4b for why this distinction matters. |
 
 ## Open Questions
 
