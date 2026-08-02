@@ -1,6 +1,6 @@
 ---
 title: Dot Ecosystem — Knowledge Packs, Worked
-version: 1.1.0
+version: 1.2.0
 status: active
 owners: [Sakhile Bhayi]
 last-review: 2026-08-02
@@ -154,15 +154,15 @@ Every example above uses the exact top-level envelope fields from [brain.dkp.md]
 
 ## 4. What blocks each real platform from publishing today
 
-The same three gaps recurred across all 15 platforms with real, shipped code this session. **Dot.Billing has now closed all three, for real** (2026-08-02) — see §4a. The rest have not.
+The same three gaps recurred across all 15 platforms with real, shipped code this session. **Dot.Billing and Dot.Emall have now closed all three, for real** (2026-08-02) — see §4a/§4b. The rest have not.
 
 | Platform | Signing key | `platform.dkp.json` manifest | Publish job/command | Notes |
 |---|---|---|---|---|
 | Dot.Billing | **Real — Ed25519, committed public half** | **Real — validates against `schemas/platform-manifest.schema.json`** | **Real — `app/Console/Commands/PublishDkpMetricPack.php`** | §4a. One real signed pack committed. Still not registered (onboarding step 2) and nowhere to transmit to (transport layer unbuilt ecosystem-wide, per [os/05-Knowledge-Protocol.md](05-Knowledge-Protocol.md) §6). |
+| Dot.Emall | **Real — Ed25519, committed public half** | **Real — validates against `schemas/platform-manifest.schema.json`** | **Real — `app/Console/Commands/PublishDkpIncidentPack.php`** | §4b. One real signed `incident_report` pack for the stock-race finding (§2.4), committed and independently verified. Second platform to clear step 1 — proves the recipe repeats. |
 | Dot.Ehail | Missing | Missing | Missing | Reservation-flow structural match to the Emall lesson above |
 | Dot.Auction | Missing | Missing | Missing | Bid-mechanics insight (§2.2) is a natural first `insight` pack; also a structural match to the Emall lesson |
 | Dot.Agents | Missing | Missing | Missing | Its own `platforms/dot-agents.md` §12 already sketches an illustrative manifest shape — useful as a template, not evidence of a real one |
-| Dot.Emall | Missing | Missing | Missing | Has the most concrete, ready-to-publish `incident_report` of any platform (§2.4) |
 | Dot.Notify | Missing | Missing | Missing | — |
 | Dot.Pulse | Missing | Missing | Missing | — |
 | Dot.Analytics | Missing | Missing | Missing | — |
@@ -187,9 +187,19 @@ This is not another illustrative example — it is the thing §5 (as it stood be
 
 What this is *not*: registered (onboarding step 2), transmitted anywhere (transport layer unbuilt ecosystem-wide, [os/05-Knowledge-Protocol.md](05-Knowledge-Protocol.md) §6), or evidence that any other platform's blockers in §4 have moved. It is exactly the single, narrow, reviewable first step §5 called for — see [Dot.Billing's wiki.md](https://github.com/sakhilebhayi/Dot.Billing/blob/main/wiki.md) §7 for the platform's own account.
 
+## 4b. Dot.Emall repeats the recipe (2026-08-02, same day)
+
+§5 (as it stood after §4a) named the next honest milestone: a second platform repeating the pattern independently, proving it's a procedure and not a one-off. Dot.Emall did it the same day:
+
+- Same shape as §4a — a real Ed25519 keypair, a manifest hand-validated against the same schema, one hand-run Artisan command (`app/Console/Commands/PublishDkpIncidentPack.php`).
+- **Different payload type** — `incident_report`, not `metric`, and it's the one this document already called "the most concrete, ready-to-publish `incident_report` of any platform" back in §2.4/§4's original blocker table: the real, already-fixed checkout stock-race incident, written to [`schemas/incident.schema.json`](../schemas/incident.schema.json) instead of the illustrative shape in §2.4 (the two differ slightly — the real schema uses `detected_by`/`method` where §2.4's example used `how`, for instance; the real one is authoritative).
+- **Ran clean on the first try.** Dot.Billing's first attempt needed a bug fix after the fact (`os/13-Engineering-State.md` §4a — a blank-env-var config bug). Dot.Emall's command used `env(...) ?: default` from the start, applying that exact lesson, and produced a real, independently-verified signature with zero fix needed.
+
+Two platforms, two different payload types, two independently generated and re-verified signatures. That's stronger evidence the recipe is repeatable than a second identical `metric` pack would have been.
+
 ## 5. What good looks like, six months from now
 
-Not "all 15 platforms publishing" — that is too large a jump to trust. §4a is the realistic, honest milestone this section originally called for: **one platform completing onboarding steps 1–4 for real**, with one real signed pack that a human has read end to end and that validates against the real schema. The next honest milestone is step 2 (registration) for Dot.Billing, or a second platform (Dot.Emall remains the strongest next candidate, per its ready-to-publish `incident_report` in §2.4) repeating §4a's pattern independently — proving it's a repeatable procedure, not a one-off.
+Not "all 15 platforms publishing" — that is too large a jump to trust. §4a set the realistic, honest milestone this section originally called for: **one platform completing onboarding steps 1–4 for real**. §4b clears the honest *next* milestone this section named — a second platform repeating the recipe independently. The next one is step 2 (registration) for either platform, which is blocked on infrastructure that doesn't exist anywhere in this ecosystem yet (a Registry Agent, tenant topics — see [os/05-Knowledge-Protocol.md](05-Knowledge-Protocol.md) §3), or a third platform proving the pattern holds for the remaining two payload types (`insight`, `recommendation`/`outcome`).
 
 ---
 
@@ -199,8 +209,9 @@ Not "all 15 platforms publishing" — that is too large a jump to trust. §4a is
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Sakhile Bhayi | Initial worked-examples companion: one example per payload type, full incident_report for the real Dot.Emall checkout stock race, per-platform blocker table for all 15 real platforms. |
 | 1.1.0 | 2026-08-02 | Sakhile Bhayi | **New §4a: Dot.Billing clears onboarding step 1 for real** — a real Ed25519 keypair, a manifest validated against `schemas/platform-manifest.schema.json`, a hand-run publish command, and one committed, independently-verified signed pack. §4's blocker table updated (Dot.Billing's three "Missing" cells replaced with real evidence). §5 rewritten — the milestone it called for is done; the next honest target is step 2 or a second platform. |
+| 1.2.0 | 2026-08-02 | Sakhile Bhayi | **New §4b: Dot.Emall repeats the recipe, same day** — a real `incident_report` pack (the checkout stock-race finding), a different payload type from Dot.Billing's `metric` pack, ran clean on the first try. §4's blocker table updated. §5 rewritten to name the next milestone (step 2, or a third payload type). |
 
 ## Open Questions
 
-- Should the Dot.Emall stock-race lesson (§2.4) be hand-published as this ecosystem's genuine first pack, ahead of Dot.Billing, precisely because the incident is real and already fixed — giving the ecosystem an honest "first pack" story instead of a synthetic metric export? Leaning yes, but no key infrastructure exists to do it yet either way.
+- **Resolved:** both published for real, same day — Dot.Billing first (a `metric` pack), Dot.Emall second (the stock-race `incident_report`). The ordering question turned out not to matter once the infrastructure existed for both.
 - The per-platform blocker table (§4) will go stale the moment any platform closes one gap — should it be regenerated from each platform's `wiki.md` roadmap section rather than hand-maintained here?

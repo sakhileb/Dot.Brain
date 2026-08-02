@@ -1,6 +1,6 @@
 ---
 title: Dot.Emall — Platform Knowledge
-version: 1.0.3
+version: 1.1.0
 status: active
 owners: [Marketplace Platform Lead, Marketplace Agent, Registry Agent]
 platform-id: dot-emall
@@ -37,6 +37,8 @@ Marketplace platform — product listings, storefronts, ordering, and buyer–se
 | `commerce.listing.unsold_expiry` | Listing expires unsold | Brain (negative outcome — file-drawer guard) | ~10²/day |
 
 ## 4. Knowledge Packs Published
+
+> **Target contract below is still aspirational** (this codebase has no `observation`/`insight`/`outcome` pipeline — see [wiki.md](https://github.com/sakhilebhayi/Dot.Emall/blob/main/wiki.md) §7). **What's real as of 2026-08-02:** Dot.Emall cleared DKP onboarding step 1 — a real signing key, a manifest validated against `schemas/platform-manifest.schema.json`, a hand-run publish command, and one committed, independently-verified `incident_report` pack for the checkout stock-race finding. The ecosystem's second platform to do this, after Dot.Billing. See [os/19-Knowledge-Packs.md](../os/19-Knowledge-Packs.md) §4b and [Dot.Emall's wiki.md](https://github.com/sakhilebhayi/Dot.Emall/blob/main/wiki.md) §6 for the real account.
 
 | Payload type | Cadence | Example pack ID |
 |---|---|---|
@@ -123,6 +125,7 @@ The value chain's middle link, closed:
 | 1.0.2 | 2026-08-01 | DKP Architect (prompt 02, AI) | Taxonomy OQ struck (schemas/taxonomy.json published) |
 
 | 1.0.3 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Emall's own wiki.md (platform repo) as the platform-owned source of truth |
+| 1.1.0 | 2026-08-02 | Sakhile Bhayi | §4 flagged: the target contract below is still aspirational, but Dot.Emall has now cleared real DKP onboarding step 1 (key, manifest, publish script, one verified `incident_report` pack) — the ecosystem's second platform to do so, see os/19-Knowledge-Packs.md §4b. |
 
 ## Open Questions
 
