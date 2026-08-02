@@ -1,6 +1,6 @@
 ---
 title: Dot.Brain — Repository Root
-version: 1.2.0
+version: 1.3.0
 status: active
 owners: [Chief Intelligence Architect, Repository Steward Agent]
 last-review: 2026-08-01
@@ -143,7 +143,14 @@ dot-brain/
 │   ├── dot-projects.md
 │   ├── dot-tasks.md
 │   ├── dot-design.md
-│   └── dot-finance.md
+│   ├── dot-finance.md
+│   ├── dot-files.md
+│   ├── dot-docs.md
+│   ├── dot-forms.md
+│   ├── dot-sheet.md
+│   ├── dot-engage.md
+│   ├── dot-press.md
+│   └── dot-tutor.md
 └── indexes/
     ├── INDEX.md                     # Master persona-based navigation · Repository Steward Agent · everyone
     ├── GLOSSARY.md                  # Canonical term definitions · Knowledge Agent · everyone
@@ -226,6 +233,7 @@ Followed by a one-paragraph purpose statement and a "Related documents" cross-li
 | 1.1.0 | 2026-08-01 | Repository Architect + Agent Colony Architect (prompts 01+04, joint) | F-03: reconciled ownership matrix and tree annotations with the 24-agent roster in brain.agents.md; removed phantom agents (Identity, DKP, Graph, Colony, Analytics, Metrics, Design, Semantic, Telemetry, API, Search, Event, Workflow, Recommendation, Experiment, Ethics) |
 | 1.1.1 | 2026-08-01 | Repository Reviewer (prompt 07, AI) | Ownership matrix: domain-agent co-ownership of platform docs noted (28-agent roster per ADR-0010) |
 | 1.2.0 | 2026-08-01 | Repository Steward Agent | Added `os/` — the Ecosystem Operating System document set (see ADR-0012); repository map and annotated tree updated to reference it |
+| 1.3.0 | 2026-08-02 | Repository Steward Agent | Registered 7 more platforms (dot-files, dot-docs, dot-forms, dot-sheet, dot-engage, dot-press, dot-tutor) — added to the annotated tree; brain.platforms.md updated to 28 of 28 platforms registered. |
 
 ## Open Questions
 

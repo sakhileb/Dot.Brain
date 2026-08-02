@@ -1,6 +1,6 @@
 ---
 title: Platform Registry & Universal Onboarding
-version: 1.0.19
+version: 1.0.20
 status: active
 owners: [Chief Knowledge Engineer, Registry Agent]
 reviewing-agent: Knowledge Agent
@@ -53,8 +53,15 @@ Integration status: `registered` (manifest validated) → `publishing` (packs in
 | dot-tasks | Task management | publishing | 1.0.0 | 0.58 | Delivery | [doc](platforms/dot-tasks.md) | — |
 | dot-design | Enterprise design system | publishing | 1.0.0 | 0.58 | UX | [doc](platforms/dot-design.md) | — |
 | dot-finance | Financial platform | publishing | 1.0.0 | 0.58 | Finance | [doc](platforms/dot-finance.md) | — |
+| dot-files | File & folder manager | registered | 1.0.0 | 0.50 | Documentation* | [doc](platforms/dot-files.md) | No versioning/sharing/S3 yet — see doc §1 |
+| dot-docs | Real-time collaborative document/wiki | registered | 1.0.0 | 0.50 | Documentation* | [doc](platforms/dot-docs.md) | Public share-link auth not fully reviewed — see doc §10 OQ |
+| dot-forms | Form builder & submission dispatch | registered | 1.0.0 | 0.50 | Extension* | [doc](platforms/dot-forms.md) | Webhook SSRF hardening open — see doc §10 OQ |
+| dot-sheet | Spreadsheet platform | registered | 1.0.0 | 0.50 | Data* | [doc](platforms/dot-sheet.md) | Settings-mutation authorization subset still coarse — see doc §7 |
+| dot-engage | Contract sharing, chat & video signing | registered | 1.0.0 | 0.50 | Community* | [doc](platforms/dot-engage.md) | Registry `campaign` icon mismatches real domain — see doc §1, §10 OQ |
+| dot-press | Slide-deck design tool | registered | 1.0.0 | 0.50 | UX* | [doc](platforms/dot-press.md) | Registry `newspaper` icon mismatches real domain — see doc §1, §10 OQ |
+| dot-tutor | Tutoring marketplace | registered | 1.0.0 | 0.50 | People* | [doc](platforms/dot-tutor.md) | Booking UI unbuilt — schema + dashboard only, see doc §1 |
 
-\* interim assignment pending open question below.
+\* interim assignment pending open question below. The 7 platforms added 2026-08-02 (dot-files through dot-tutor) inherit domain-agent assignments by closest-fit analogy (storage→Documentation, forms→Extension, spreadsheets→Data, contracts/chat→Community, design tool→UX, tutoring→People) — none formally ratified, same interim status as the platforms this note originally covered.
 
 Per-platform `platforms/<platform>.md` documents are produced one per session by prompt 05 ("Using 05, integrate Dot.<Platform>").
 
@@ -136,3 +143,4 @@ Suppose **Dot.Logistics** (fleet routing SaaS) launches in 2029:
 | 1.0.17 | 2026-08-01 | Platform Integrator (prompt 05, AI) | dot-agents integration package published: status → publishing (0.58); colony runtime contract gap closed; five domain-agent assignments recorded pending brain.agents.md promotion |
 | 1.0.18 | 2026-08-01 | Platform Integrator (prompt 05, AI) | dot-design integration package published: status → publishing (0.58); token-consumption contract gap closed; four inherited open questions settled |
 | 1.0.19 | 2026-08-01 | Platform Integrator (prompt 05, AI) | dot-brain self-referential doc published: final gap closed, self-knowledge OQ resolved. F-06 complete — 21 of 21 platforms documented |
+| 1.0.20 | 2026-08-02 | Repository Steward Agent | 7 platforms formally registered (dot-files, dot-docs, dot-forms, dot-sheet, dot-engage, dot-press, dot-tutor) — real, previously-untracked repos discovered via InfoDot's platform registry, audited and integrated same day. Ecosystem is now 28 of 28 platforms registered (21 original + 7 new), all `registered` status pending real DKP publishing. |

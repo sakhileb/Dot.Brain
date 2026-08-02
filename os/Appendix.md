@@ -1,6 +1,6 @@
 ---
 title: Dot Ecosystem — Appendix
-version: 1.1.0
+version: 1.2.0
 status: active
 owners: [Sakhile Bhayi]
 last-review: 2026-08-01
@@ -37,12 +37,19 @@ Repo URL pattern is `github.com/sakhilebhayi/<name>` unless a naming discrepancy
 | Dot.Design | `github.com/sakhilebhayi/Dot.Design` | Real code | AI canvas design tool; token/component-library scaffold added this session — domain mismatch vs. original brief flagged in [platforms/dot-design.md](../platforms/dot-design.md) |
 | Dot.Plug | `github.com/sakhilebhayi/Dot.Plug` | Real code (hand-authored, unverified) | Developer marketplace / extension framework — Jetstream shell copied from Dot.Billing, Extension/Installation domain built from scratch |
 | Dot.Farms | `github.com/sakhilebhayi/Dot.Farms` | Real code (hand-authored, unverified) | Agriculture ERP — Farm/Field/Crop/CropCycle/HarvestRecord domain built from scratch |
-| Dot.HR | `github.com/sakhilebhayi/Dot.HR` | Real code (hand-authored, unverified) | Human Resource platform — Employee/Position/LeaveRequest domain built from scratch; has a known open authorization gap, see [13-Engineering-State.md](13-Engineering-State.md) §3 |
+| Dot.HR | `github.com/sakhilebhayi/Dot.HR` | Real code (hand-authored, unverified) | Human Resource platform — Employee/Position/LeaveRequest domain built from scratch; the role-gating gap noted in earlier revisions of this table was closed in a second pass, see [13-Engineering-State.md](13-Engineering-State.md) §3 |
 | Dot.Dopemine | `github.com/sakhilebhayi/Dot.Dopemine` | Real code (hand-authored, unverified) | Engagement intelligence engine — Mechanic catalog with the ethics constraint enforced at three structural layers |
 | Dot.Memory | `github.com/sakhilebhayi/Dot.Memory` | Real code (hand-authored, unverified) | Long-term semantic memory — storage/retrieval telemetry domain with "store without reading" enforced at the schema level |
-| Dot.Brain | (this repo) | Fully speced, not a SaaS app | ~35 `brain.*.md` docs, 21 platform knowledge docs, 11 ADRs — the knowledge/reasoning layer, not a product platform |
+| Dot.Files | `github.com/sakhilebhayi/Dot.Files` | Real code (pre-existing, integrated 2026-08-02) | File & folder manager — discovered via InfoDot's platform registry, not originally tracked; audited and registered same day |
+| Dot.Docs | `github.com/sakhilebhayi/Dot.docs` | Real code (pre-existing, integrated 2026-08-02) | Real-time collaborative document/wiki platform |
+| Dot.Forms | `github.com/sakhilebhayi/Dot.Forms` | Real code (pre-existing, integrated 2026-08-02) | Form builder & submission dispatch |
+| Dot.Sheet | `github.com/sakhilebhayi/Dot.Sheet` | Real code (pre-existing, integrated 2026-08-02) | Spreadsheet platform |
+| Dot.Engage | `github.com/sakhilebhayi/Dot.Engage` | Real code (pre-existing, integrated 2026-08-02) | Contract sharing, chat & video signing — **domain mismatch:** registry's `campaign` icon assumed a marketing product; real code is contracts/chat/video-signing, see [platforms/dot-engage.md](../platforms/dot-engage.md) |
+| Dot.Press | `github.com/sakhilebhayi/Dot.Press` | Real code (pre-existing, integrated 2026-08-02) | Slide-deck design tool — **domain mismatch:** registry's `newspaper` icon assumed a newsroom product; real code is a Canva-style design tool on Inertia+Vue (not Livewire, unlike every sibling platform), see [platforms/dot-press.md](../platforms/dot-press.md) |
+| Dot.Tutor | `github.com/sakhilebhayi/Dot.Tutor` | Real code (pre-existing, integrated 2026-08-02) | Tutoring marketplace — schema + dashboard only, no booking UI yet |
+| Dot.Brain | (this repo) | Fully speced, not a SaaS app | ~35 `brain.*.md` docs, 28 platform knowledge docs, 12 ADRs — the knowledge/reasoning layer, not a product platform |
 
-**Count:** all 20 product platforms now have real code (15 extending an already-installed Jetstream app, 5 hand-authored from an empty scaffold this session), plus Dot.Brain itself (the knowledge layer, structurally different from the other 20). "~20 platforms" in the rest of this doc set means these 20 product platforms, Dot.Brain counted separately as the layer above them. **None of the 20 has been executed against a real PHP/Postgres environment** — see [13-Engineering-State.md](13-Engineering-State.md) §4.
+**Count:** 28 platforms now have real code — the original 20 (15 extending an already-installed Jetstream app, 5 hand-authored from an empty scaffold), plus 7 more (Dot.Files, Dot.Docs, Dot.Forms, Dot.Sheet, Dot.Engage, Dot.Press, Dot.Tutor) discovered via InfoDot's own platform registry and integrated on 2026-08-02 — turned out to be real, substantially pre-built platforms nobody had tracked, not empty scaffolds. Plus Dot.Brain itself (the knowledge layer, structurally different from the other 28). "~20 platforms" in earlier parts of this doc set is now understated; the ecosystem is 28 product platforms. **None of the 28 has been executed against a real PHP/Postgres environment** — see [13-Engineering-State.md](13-Engineering-State.md) §4.
 
 ## 2. Logo assets
 
@@ -105,6 +112,7 @@ Full definitions live in [../indexes/GLOSSARY.md](../indexes/GLOSSARY.md); this 
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Owner + AI (os/ document set, session 1) | Initial appendix; platform list, logo location, and glossary excerpt verified against this repo and the logos folder at write time |
 | 1.1.0 | 2026-08-01 | Sakhile Bhayi | Updated all 5 previously-empty platforms to "Real code (hand-authored, unverified)" now that they're built and pushed; corrected the MVP-scaffold glossary entry accordingly |
+| 1.2.0 | 2026-08-02 | Sakhile Bhayi | Added 7 platforms (Dot.Files, Dot.Docs, Dot.Forms, Dot.Sheet, Dot.Engage, Dot.Press, Dot.Tutor) discovered via InfoDot's own platform registry — real, substantially pre-built repos nobody had tracked. Ecosystem count moves from 20 to 28 product platforms. Corrected Dot.HR's row (its role-gating gap was closed, not still open). |
 
 ## Open Questions
 

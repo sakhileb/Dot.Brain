@@ -1,6 +1,6 @@
 ---
 title: Dot Ecosystem — Engineering State
-version: 3.0.0
+version: 4.0.0
 status: active
 owners: [Sakhile Bhayi]
 last-review: 2026-08-01
@@ -46,11 +46,22 @@ flowchart LR
         E4[Dot.Dopemine]
         E5[Dot.Memory]
     end
-    HandAuthored -->|"next: real composer install +\nphp artisan migrate/test"| Verified[All 20 — verified in a real environment]
+    subgraph Discovered["7 platforms — pre-built, discovered via InfoDot's registry (§3a)"]
+        direction TB
+        F1[Dot.Files]
+        F2[Dot.Docs]
+        F3[Dot.Forms]
+        F4[Dot.Sheet]
+        F5[Dot.Engage]
+        F6[Dot.Press]
+        F7[Dot.Tutor]
+    end
+    HandAuthored -->|"next: real composer install +\nphp artisan migrate/test"| Verified[All 27 — verified in a real environment]
     Extended --> Verified
+    Discovered --> Verified
 ```
 
-All 20 Dot platforms now have real, committed code as of this update. **None of it has been executed** — every platform in both groups was written and reviewed without a local PHP/Postgres/Docker runtime; see §4. The distinction between the two groups is provenance, not quality: the 15 "extended" platforms started from a real `composer create-project`/`jetstream:install` output and had a domain added or polished on top; the 5 "hand-authored" platforms had their entire Jetstream Teams shell (auth, teams, 2FA, API tokens) copied file-by-file from Dot.Billing's already-real install and adapted, then given a from-scratch domain layer — a materially higher-risk path since no tool ever actually ran `jetstream:install` against these five.
+All 27 Dot platform apps now have real, committed code as of this update (plus Dot.Brain itself, the ecosystem's intelligence layer). **None of it has been executed** — every platform in all three groups was written and reviewed without a local PHP/Postgres/Docker runtime; see §4. The three groups differ by provenance, not quality: the 15 "extended" platforms started from a real `composer create-project`/`jetstream:install` output and had a domain added or polished on top; the 5 "hand-authored" platforms had their entire Jetstream Teams shell (auth, teams, 2FA, API tokens) copied file-by-file from Dot.Billing's already-real install and adapted, then given a from-scratch domain layer — a materially higher-risk path since no tool ever actually ran `jetstream:install` against these five; the 7 "discovered" platforms (§3a) were already substantially real, working codebases nobody had tracked in Dot.Brain's registry until they were found via InfoDot's own `config/ecosystem.php` and integrated in a single pass each.
 
 Dot.Brain itself (this repository) is out of scope for this loop — it is the ecosystem's intelligence layer, not a Jetstream application, and is governed by its own [CLAUDE.md](../CLAUDE.md) instead.
 
@@ -88,6 +99,22 @@ Per [02-Engineering-Loop.md](02-Engineering-Loop.md) §4, each was built by copy
 | **Dot.Dopemine** | Mechanic/MechanicDeployment/ProhibitedMetricPattern catalog | The manifesto's ethics constraint enforced at three structural layers (closed enum, action-level check, model `saving` listener). | Re-verified all three layers still fully intact and unweakened. Found and closed a real test-coverage gap: `MechanicDeployment` tenancy was correctly enforced in code but had no regression test — added one. |
 | **Dot.Farms** | Farm/Field/Crop/CropCycle/PlantingRecord/HarvestRecord | `FarmPolicy` verified across every child-resource controller; the one by-ID-route-free resource (Crop) confirmed to have no cross-team surface. | Re-verified — `FarmPolicy` coverage still complete and unweakened across all 6 controllers. Clean. |
 
+## 3a. Seven platforms discovered via InfoDot's registry, integrated 2026-08-02 (7)
+
+These were never hand-authored or extended by this loop — they surfaced when InfoDot's own `config/ecosystem.php` was reconciled against the real ecosystem (see [os/Appendix.md](Appendix.md) §1) and turned out to be real, substantially pre-built Laravel 13/Jetstream 5/Livewire 3 apps (Dot.Press uses Inertia+Vue instead), each already wired with a working `EcosystemAuthController` matching the ecosystem's SSO contract, that nobody had tracked. Each got one integration pass: verify the SSO contract, a bounded IDOR-focused security scan, branding/favicon completion, a `wiki.md`, and a README accuracy correction — the same bar as everything else in this document, just compressed into a single pass since there was no separate "build" phase to do first.
+
+| Platform | Real domain (often didn't match the registry's assumption) | Standout finding |
+|---|---|---|
+| **Dot.Files** | File/folder manager, single self-referential `objects` table | A migration typo (`contrained` → `constrained`) that would fatal on first real `migrate` — caught before it ever ran. |
+| **Dot.Docs** | Real-time collaborative document/wiki (Notion-shaped) | Two real IDOR gaps closed (`VersionHistory`, `TemplateGallery` unscoped lookups); `DB_DATABASE` was silently falling back to a nonexistent database instead of the shared `infodot` instance. |
+| **Dot.Forms** | Team-scoped form builder with webhook/CRM dispatch | Security scan came back clean — already properly scoped. SSRF hardening on webhook dispatch URLs flagged, not fixed (out of bounded scope). |
+| **Dot.Sheet** | Full spreadsheet platform, real-time collab | **Most severe finding of this batch:** six Livewire components had zero authorization checks, and the main grid only checked `view` at mount without re-checking `update` on mutations — view/comment-only shared users could actually write cell data, comments, and charts. Closed. Also fixed a broken `/dashboard` route left inconsistent by a prior commit. |
+| **Dot.Engage** | Contract sharing, chat & video-call document signing — **not** the marketing/campaign product its `campaign` registry icon implied | **A live, exploitable cross-tenant data leak**, not just a theoretical gap: an incomplete prior "fix" commit added dashboard queries with zero team scoping, so every team's dashboard showed every other team's actual contract/conversation records. Closed same day found. |
+| **Dot.Press** | Slide-deck design tool (Canva-shaped) — **not** the newsroom/CMS its `newspaper` registry icon implied; also the one platform on Inertia+Vue instead of Livewire | A fully broken `/dashboard` route (referenced a Blade view that doesn't exist in this Inertia app) — fixed by reading the real Vue component's expected props, not guessed. |
+| **Dot.Tutor** | Tutoring marketplace — schema + dashboard only, no booking UI exists yet | A live cross-user data disclosure: any logged-in user could see every other user's session pairing/subject/dollar amount on `/dashboard`. Closed. Also correctly overrode an incorrect assumption in its own task brief about a stray logo file being a personal brand mark — verified directly, found it was genuinely the platform's real logo. |
+
+Formally registered in [brain.platforms.md](../brain.platforms.md) with their own `platforms/*.md` docs (2026-08-02) — the ecosystem is now 28 product platforms, not 20.
+
 ## 4. Known outstanding environment gaps
 
 Two gaps are open as of this writing and should be tracked until closed:
@@ -108,6 +135,7 @@ All 20 platforms now have code; there is no longer an "empty" category to promot
 | 1.0.0 | 2026-08-01 | Sakhile Bhayi | Initial state snapshot — 15 platforms through the loop, 5 empty scaffolds, 2 open environment gaps. |
 | 2.0.0 | 2026-08-01 | Sakhile Bhayi | All 5 previously-empty platforms (Dot.Plug, Dot.Farms, Dot.HR, Dot.Dopemine, Dot.Memory) hand-authored and pushed. §3 rewritten from "not started" to a completion table with each platform's standout characteristic. All 20 Dot platforms now have real code; the "empty scaffold" category no longer exists. |
 | 3.0.0 | 2026-08-02 | Sakhile Bhayi | **Second pass across all 20 platforms**, run in 4 batches with periodic check-ins. §2/§3 tables restructured to show pass-1 vs. pass-2 findings side by side. Found and fixed **8 more real bugs**, including two serious cross-tenant/cross-org IDOR vulnerabilities (Dot.Agents' governance stack, Dot.Pulse's private communities) and a second, actually-reachable cross-tenant leak in mines (distinct from pass 1's fix). Closed the `S=1` gap on all 5 previously-fenced-off platforms (Dot.Agents, Dot.Pulse, Dot.Analytics, Dot.Central, Dot.Design) with a dedicated deep pass on exactly the internals pass 1 declined to touch. Closed Dot.HR's top-priority role-gating gap. Dot.Auction and ChartSense correctly declined to force a fix where investigation showed the real gap was bigger than it looked, or nothing bounded existed. |
+| 4.0.0 | 2026-08-02 | Sakhile Bhayi | **Seven previously-untracked platforms discovered and integrated** (§3a): Dot.Files, Dot.Docs, Dot.Forms, Dot.Sheet, Dot.Engage, Dot.Press, Dot.Tutor — found via reconciling InfoDot's own `config/ecosystem.php` against the real ecosystem, each already a substantially real, working codebase nobody had registered. Closed two live, exploitable cross-tenant/cross-user data leaks (Dot.Engage's dashboard, Dot.Tutor's dashboard), a systemic Livewire authorization gap allowing view-only users to write data (Dot.Sheet), two broken dashboard routes (Dot.Sheet, Dot.Press), two IDOR gaps (Dot.Docs), and a migration typo that would fatal on first real `migrate` (Dot.Files). §1 status diagram now shows all three provenance groups (Extended/HandAuthored/Discovered) totaling 27 platform apps. Formally registered in [brain.platforms.md](../brain.platforms.md) — the ecosystem is now 28 of 28 platforms registered. |
 
 ## Open Questions
 
