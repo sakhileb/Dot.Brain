@@ -1,12 +1,12 @@
 ---
 title: Dot.Billing — Platform Knowledge
-version: 1.0.1
+version: 1.1.0
 status: active
 owners: [Billing Platform Lead, Finance Agent, Registry Agent]
 platform-id: dot-billing
 dkp-version: 1.0.0
 integration-status: publishing
-last-review: 2026-08-01
+last-review: 2026-08-02
 ---
 
 # Dot.Billing
@@ -38,6 +38,8 @@ Payments and subscriptions — settlement of marketplace orders, recurring subsc
 | `finance.dunning.opened/closed` | Recovery case | Brain (aggregate only) | low |
 
 ## 4. Knowledge Packs Published
+
+> **Target contract below is still aspirational** (settlement/payout domains this codebase doesn't model yet — see [wiki.md](https://github.com/sakhilebhayi/Dot.Billing/blob/main/wiki.md) §4/§8). **What's real as of 2026-08-02:** Dot.Billing cleared DKP onboarding step 1 — a real signing key, a manifest validated against `schemas/platform-manifest.schema.json`, a hand-run publish command, and one committed, independently-verified `metric` pack for `billing.invoice_payment_success_rate`. See [os/19-Knowledge-Packs.md](../os/19-Knowledge-Packs.md) §4a and [Dot.Billing's wiki.md](https://github.com/sakhilebhayi/Dot.Billing/blob/main/wiki.md) §7 for the real account; §12 below remains the illustrative target manifest, not what's actually committed (the real one has a different, simpler shape — no `publishes`/`tenancy` fields exist in the normative schema).
 
 | Payload type | Cadence | Example pack ID |
 |---|---|---|
@@ -137,6 +139,7 @@ The value chain's third link, closed:
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Platform Integrator (prompt 05, AI) | Initial integration package: settlement-domain ownership, seam-metric canonical statement, two-tier aggregation-floor configuration (registry gap closed, manifest-enforced), restricted-by-default classification, minimal dopamine surface by policy, 3 domain metrics, worked round-trip |
+| 1.1.0 | 2026-08-02 | Sakhile Bhayi | §4 flagged: the target contract below is still aspirational, but Dot.Billing has now cleared real DKP onboarding step 1 (key, manifest, publish script, one verified signed pack) — see os/19-Knowledge-Packs.md §4a. |
 
 | 1.0.1 | 2026-08-01 | Repository Steward Agent | Linked to Dot.Billing's own wiki.md (platform repo) as the platform-owned source of truth |
 

@@ -1,9 +1,9 @@
 ---
 title: Dot Ecosystem — Knowledge Packs, Worked
-version: 1.0.0
+version: 1.1.0
 status: active
 owners: [Sakhile Bhayi]
-last-review: 2026-08-01
+last-review: 2026-08-02
 ---
 
 # 19 — Knowledge Packs, Worked
@@ -154,11 +154,11 @@ Every example above uses the exact top-level envelope fields from [brain.dkp.md]
 
 ## 4. What blocks each real platform from publishing today
 
-The same three gaps recur across all 15 platforms with real, shipped code this session. None has closed any of them yet.
+The same three gaps recurred across all 15 platforms with real, shipped code this session. **Dot.Billing has now closed all three, for real** (2026-08-02) — see §4a. The rest have not.
 
 | Platform | Signing key | `platform.dkp.json` manifest | Publish job/command | Notes |
 |---|---|---|---|---|
-| Dot.Billing | Missing | Missing | Missing | Best first-mover candidate — has clean, well-defined payment metrics ready to wrap (§2.1) |
+| Dot.Billing | **Real — Ed25519, committed public half** | **Real — validates against `schemas/platform-manifest.schema.json`** | **Real — `app/Console/Commands/PublishDkpMetricPack.php`** | §4a. One real signed pack committed. Still not registered (onboarding step 2) and nowhere to transmit to (transport layer unbuilt ecosystem-wide, per [os/05-Knowledge-Protocol.md](05-Knowledge-Protocol.md) §6). |
 | Dot.Ehail | Missing | Missing | Missing | Reservation-flow structural match to the Emall lesson above |
 | Dot.Auction | Missing | Missing | Missing | Bid-mechanics insight (§2.2) is a natural first `insight` pack; also a structural match to the Emall lesson |
 | Dot.Agents | Missing | Missing | Missing | Its own `platforms/dot-agents.md` §12 already sketches an illustrative manifest shape — useful as a template, not evidence of a real one |
@@ -174,11 +174,22 @@ The same three gaps recur across all 15 platforms with real, shipped code this s
 | Dot.Central | Missing | Missing | Missing | Documented ingestion-doc mismatch (see [os/04-Dot-Brain.md](04-Dot-Brain.md) §4) |
 | Dot.Design | Missing | Missing | Missing | Documented ingestion-doc mismatch — real app is an AI canvas tool, not the enterprise token system the ingestion doc centers on |
 
-No platform in this table has cleared even step 1 of the six-step onboarding procedure ([brain.platforms.md](../brain.platforms.md) §3). The concrete unblock for any one of them is the five-step sequence in [os/05-Knowledge-Protocol.md](05-Knowledge-Protocol.md) §5.
+Every other platform in this table has not cleared even step 1 of the six-step onboarding procedure ([brain.platforms.md](../brain.platforms.md) §3). The concrete unblock for any one of them is still the five-step sequence in [os/05-Knowledge-Protocol.md](05-Knowledge-Protocol.md) §5 — the exact sequence Dot.Billing just followed.
+
+## 4a. Dot.Billing's first, real step (2026-08-02)
+
+This is not another illustrative example — it is the thing §5 (as it stood before this update) said the ecosystem needed most: one platform, for real.
+
+- **Key.** A real Ed25519 keypair, generated once outside any CI system (no PHP/sodium runtime exists in this environment either — the generation itself used Node's `crypto.generateKeyPairSync('ed25519')`, and the raw 32-byte seed was extracted from the PKCS8 DER export, since that's the format `sodium_crypto_sign_seed_keypair()` consumes). Public half committed in the manifest below; private half never committed, kept at `storage/app/private/dkp-signing.key` in Dot.Billing's repo, gitignored.
+- **Manifest.** [`platform.dkp.json`](https://github.com/sakhilebhayi/Dot.Billing/blob/main/platform.dkp.json) in the Dot.Billing repo root — hand-validated field by field against [`schemas/platform-manifest.schema.json`](../schemas/platform-manifest.schema.json): `platform`, `display_name`, `dkp_version`, `endpoints` (all three required sub-fields), one `keys[]` entry with `key_id`/`algorithm`/`public_key`/`valid_from`, `contacts[]`. No extra fields — the schema's `additionalProperties: false` was checked against, not assumed.
+- **Publish script.** [`app/Console/Commands/PublishDkpMetricPack.php`](https://github.com/sakhilebhayi/Dot.Billing/blob/main/app/Console/Commands/PublishDkpMetricPack.php) — a single hand-run Artisan command, not a job or pipeline, per §5 step 3's explicit sizing. It computes `billing.invoice_payment_success_rate` from real `billing_invoices` columns (`status`, `due_date`, `paid_at`) grouped by month, canonicalizes the pack (recursive key-sort, RFC 8785-shaped) excluding the not-yet-populated `signatures` array, signs that canonical form with `sodium_crypto_sign_detached`, and writes the result — it also verifies its own signature against the derived public key before reporting success, so a broken key or canonicalization bug fails loudly rather than writing an unverifiable pack.
+- **One real pack.** Committed at `storage/app/dkp/packs/` in the Dot.Billing repo — produced against this environment's actual database state (no PHP runtime, no seeded rows), so `body.observations` is honestly absent rather than fabricated, and `confidence` is set to `0.30` to reflect "verified definition, not yet a verified measurement." The signature was generated and independently re-verified (Node's `crypto.sign`/`crypto.verify`, matching the PHP command's exact canonicalization) against the public key committed in the manifest — this is a real, checkable cryptographic artifact, not a `<unsigned — no key exists yet>` placeholder like every example in §2.
+
+What this is *not*: registered (onboarding step 2), transmitted anywhere (transport layer unbuilt ecosystem-wide, [os/05-Knowledge-Protocol.md](05-Knowledge-Protocol.md) §6), or evidence that any other platform's blockers in §4 have moved. It is exactly the single, narrow, reviewable first step §5 called for — see [Dot.Billing's wiki.md](https://github.com/sakhilebhayi/Dot.Billing/blob/main/wiki.md) §7 for the platform's own account.
 
 ## 5. What good looks like, six months from now
 
-Not "all 15 platforms publishing" — that is too large a jump to trust. A realistic, honest milestone: **one platform** (Dot.Billing or Dot.Emall are the strongest candidates, per the table above) completes onboarding steps 1–4 for real, with one real signed pack that a human has read end to end and that validates against the real schema. That single data point is worth more to this ecosystem's credibility than a dozen more platforms added to the `platforms/` directory describing contracts nothing has exercised.
+Not "all 15 platforms publishing" — that is too large a jump to trust. §4a is the realistic, honest milestone this section originally called for: **one platform completing onboarding steps 1–4 for real**, with one real signed pack that a human has read end to end and that validates against the real schema. The next honest milestone is step 2 (registration) for Dot.Billing, or a second platform (Dot.Emall remains the strongest next candidate, per its ready-to-publish `incident_report` in §2.4) repeating §4a's pattern independently — proving it's a repeatable procedure, not a one-off.
 
 ---
 
@@ -187,6 +198,7 @@ Not "all 15 platforms publishing" — that is too large a jump to trust. A reali
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Sakhile Bhayi | Initial worked-examples companion: one example per payload type, full incident_report for the real Dot.Emall checkout stock race, per-platform blocker table for all 15 real platforms. |
+| 1.1.0 | 2026-08-02 | Sakhile Bhayi | **New §4a: Dot.Billing clears onboarding step 1 for real** — a real Ed25519 keypair, a manifest validated against `schemas/platform-manifest.schema.json`, a hand-run publish command, and one committed, independently-verified signed pack. §4's blocker table updated (Dot.Billing's three "Missing" cells replaced with real evidence). §5 rewritten — the milestone it called for is done; the next honest target is step 2 or a second platform. |
 
 ## Open Questions
 

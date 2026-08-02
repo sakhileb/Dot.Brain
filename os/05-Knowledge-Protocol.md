@@ -1,9 +1,9 @@
 ---
 title: Dot Ecosystem — The Knowledge Protocol, Plainly
-version: 1.0.0
+version: 1.1.0
 status: active
 owners: [Sakhile Bhayi]
-last-review: 2026-08-01
+last-review: 2026-08-02
 ---
 
 # 05 — The Knowledge Protocol, Plainly
@@ -53,19 +53,19 @@ Two details worth carrying up to this altitude:
 
 ## 4. The realistic gap, stated plainly
 
-`brain.platforms.md` currently lists all 21 registered platforms as `publishing` or `full-loop`. That reflects the documentation work done to specify each platform's *intended* integration contract — not a verified live state. The real, honest status of every one of the 15 platforms with actual shipped code this session (Dot.Billing, Dot.Ehail, Dot.Auction, Dot.Agents, Dot.Emall, Dot.Notify, Dot.Pulse, Dot.Analytics, mines, Dot.Projects, Dot.Tasks, Dot.Finance, ChartSense, Dot.Central, Dot.Design) is: **step 0.** None has committed a `platform.dkp.json`, none has a provisioned signing key, and none has a publish job or CLI command that could emit a real pack. This is not a criticism of any one platform — it is a consistent, universal finding, and it means the registry's status column and reality have diverged. [os/19-Knowledge-Packs.md](19-Knowledge-Packs.md) §4 lists the blocker for each platform individually.
+`brain.platforms.md` currently lists all registered platforms as `publishing` or `full-loop`. That reflects the documentation work done to specify each platform's *intended* integration contract — not a verified live state. As of 2026-08-01, the honest status of every one of the platforms with actual shipped code was **step 0** across the board: no `platform.dkp.json`, no provisioned signing key, no publish job or CLI command. **That is no longer universally true — see §5.** Dot.Billing closed all three gaps for real on 2026-08-02, the first platform in the ecosystem to do so. Every other platform remains at step 0; [os/19-Knowledge-Packs.md](19-Knowledge-Packs.md) §4 lists the blocker for each individually.
 
-## 5. What "first, real step" actually looks like — worked concretely for Dot.Billing
+## 5. What "first, real step" looks like — now proven, not just worked, for Dot.Billing
 
-Not "adopt the protocol" — that is too large a step to review or trust in one pass. The concrete first move, consistent with the bounded-pass discipline in [os/02-Engineering-Loop.md](02-Engineering-Loop.md):
+Not "adopt the protocol" — that is too large a step to review or trust in one pass. This section originally laid out the concrete first move as a recipe; **Dot.Billing has now actually followed it**, on 2026-08-02, and the recipe held up:
 
-1. **Generate one Ed25519 keypair** for Dot.Billing and store the private half wherever the platform already keeps secrets (a `.env`-referenced path or a vault entry — whatever convention the codebase already uses; do not invent a new secrets mechanism for this alone).
-2. **Commit a minimal `platform.dkp.json`** in the Dot.Billing repository: `platform_id: dot-billing`, the public key reference, and a `publishes: ["observation"]` list containing exactly one payload type — not all four. Follow the shape already worked out in [platforms/dot-agents.md](../platforms/dot-agents.md) §12 as a manifest example, adjusted for Billing's own domain.
-3. **Write one publish script**, not a job scheduler or a pipeline — a script a human runs by hand that takes one real metric Dot.Billing already computes (for example, `billing.invoice_payment_success_rate`), wraps it in the `metric` payload shape from [brain.dkp.md](../brain.dkp.md) §1.4, signs it, and writes the resulting JSON to a file. It does not need to actually transmit anywhere yet — DKP's transport layer (mTLS, tenant topics, [brain.dkp.md](../brain.dkp.md) §8) is itself unbuilt across the ecosystem and is a separate, later piece of work.
-4. **Hand-validate that one file** against `schemas/knowledge-pack.schema.json` and get a human to read it end to end before treating step 1 of the onboarding procedure as done.
-5. Only after that one pack exists, validates, and has been read by a human does step 2 (registration) become a real next action rather than a documentation exercise.
+1. **Generate one Ed25519 keypair** for Dot.Billing and store the private half wherever the platform already keeps secrets. *Done* — Dot.Billing has no PHP/sodium runtime in this environment either, so the key was generated once via Node's `crypto.generateKeyPairSync('ed25519')` and the raw seed extracted from its PKCS8 DER export; the public half is committed, the private half lives at `storage/app/private/dkp-signing.key`, gitignored.
+2. **Commit a real `platform.dkp.json`.** *Done* — but note the actual, normative shape turned out to differ from the illustrative one this step originally pointed to ([platforms/dot-agents.md](../platforms/dot-agents.md) §12, which has no `publishes`/`subscribes`/`tenancy` fields in the real schema): the real required shape is `platform`, `display_name`, `dkp_version`, `endpoints` (`publish_topic`/`response_topic`/`pr_repository`), `keys[]`, `contacts[]`, per [`schemas/platform-manifest.schema.json`](../schemas/platform-manifest.schema.json) — hand-validated field by field, not assumed from the illustrative example.
+3. **Write one publish script.** *Done* — [`app/Console/Commands/PublishDkpMetricPack.php`](https://github.com/sakhilebhayi/Dot.Billing/blob/main/app/Console/Commands/PublishDkpMetricPack.php), a single hand-run Artisan command, not a scheduler or pipeline. It computes `billing.invoice_payment_success_rate` from real `billing_invoices` columns, wraps it in the `metric` payload shape, canonicalizes and signs it, and writes the resulting JSON to a file. It still does not transmit anywhere — DKP's transport layer (§6 below) remains unbuilt.
+4. **Hand-validate that one file** against `schemas/knowledge-pack.schema.json` and read it end to end. *Done* — see [os/19-Knowledge-Packs.md](19-Knowledge-Packs.md) §4a for the full account, including the independent signature re-verification performed outside the PHP command itself.
+5. Step 2 (registration) is now the real next action for Dot.Billing specifically — no longer a documentation exercise, since step 1 is genuinely behind it.
 
-This is deliberately smaller than "build the DKP integration" — it is sized to fit inside one reviewable pass, the same discipline applied to every other change in this ecosystem this session.
+This was deliberately smaller than "build the DKP integration" — sized to fit inside one reviewable pass, same discipline as every other change in this ecosystem. The fact that it held up when actually attempted (only the manifest shape needed a correction against the real schema) is itself useful signal for whichever platform attempts it next.
 
 ## 6. What is explicitly *not* part of the near-term roadmap
 
@@ -84,8 +84,9 @@ This is deliberately smaller than "build the DKP integration" — it is sized to
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 1.0.0 | 2026-08-01 | Sakhile Bhayi | Initial OS-layer framing of DKP: plain-language explanation, four payload types at a glance, onboarding procedure summarized (not redefined), honest gap statement, concrete five-step first move for Dot.Billing. |
+| 1.1.0 | 2026-08-02 | Sakhile Bhayi | **§5's five-step recipe actually executed, not just proposed** — Dot.Billing cleared onboarding step 1 for real (key, manifest, publish script, one validated signed pack). §4 updated to state Dot.Billing is no longer at step 0. §5's manifest step corrected against the real normative schema, which differs from the illustrative dot-agents.md example it originally pointed to. |
 
 ## Open Questions
 
-- Should the ecosystem standardize on a single secrets convention for platform signing keys before any platform does step 1, so 15 platforms don't each invent their own? Currently unresolved — no platform has needed to decide yet.
-- Is a hand-run publish script (§5, step 3) an acceptable permanent shape for low-volume platforms, or should every platform eventually be expected to run a scheduled job? Leaning toward "hand-run is fine until publish volume or urgency requires otherwise" — no evidence yet either way.
+- Should the ecosystem standardize on a single secrets convention for platform signing keys before any other platform does step 1? Dot.Billing's answer — a `.env`-referenced raw-seed file under a gitignored `storage/app/private/`, documented in a README there — is now a real precedent other platforms could copy rather than reinvent, but it hasn't been declared a standard.
+- Is a hand-run publish script (§5, step 3) an acceptable permanent shape for low-volume platforms, or should every platform eventually be expected to run a scheduled job? Dot.Billing's command still has to be invoked by hand — no evidence yet on whether that scales past one platform.
