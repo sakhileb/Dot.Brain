@@ -1,6 +1,6 @@
 ---
 title: Dot Ecosystem — MEGA v2 (Composite Platform Scoring Model)
-version: 2.1.0
+version: 2.2.0
 status: active
 owners: [Sakhile Bhayi]
 last-review: 2026-08-01
@@ -89,12 +89,12 @@ Pre-built, real codebases nobody had registered until InfoDot's `config/ecosyste
 | Dot.Docs | 2 | 2 | 2 | 2 | 0 | 8 | Two real IDOR gaps closed (`VersionHistory`, `TemplateGallery`); a silent wrong-database fallback also fixed. |
 | Dot.Files | 2 | 2 | 2 | 2 | 0 | 8 | A migration typo that would fatal on first real `migrate` caught and fixed before it ever ran. |
 | Dot.Press | 2 | 2 | 2 | 2 | 0 | 8 | Fully broken `/dashboard` route (referenced a nonexistent Blade view in this actually-Inertia+Vue app) fixed against the real component's prop contract. |
-| Dot.Tutor | 1 | 2 | 2 | 2 | 0 | 7 | A live cross-user session-data disclosure closed, but `E` stays at 1 — no booking UI/controller exists yet, so the core domain action (booking a session) cannot be performed through this app today. |
-| Dot.Forms | 2 | 1 | 2 | 2 | 0 | 7 | Security scan came back clean for IDOR, but a real, named gap was flagged and left open: webhook dispatch URLs have no SSRF hardening — `S` stays at 1 until that's closed. |
+| Dot.Tutor | 2 | 2 | 2 | 2 | 0 | 8 | **Pass 2:** the missing booking UI is built — `TutorBookingController` + `TutorSessionPolicy` (authorization designed in from the start, not retrofitted after an IDOR was found). `E` moves 1→2: a student can now actually book a session through this app. |
+| Dot.Forms | 2 | 2 | 2 | 2 | 0 | 8 | **Pass 2:** the SSRF gap is closed — `App\Support\SsrfGuard` rejects webhook/CRM URLs resolving to loopback/private/link-local addresses, enforced at both save and dispatch time; redirects disabled. `S` moves 1→2. |
 
-**Mean of these 7: 7.71 / 10.** Slightly below the 8.0 mean of the other 20 — expected, since none of these has had the second confirmatory pass yet, and two (Dot.Tutor, Dot.Forms) have real, specifically-named open gaps rather than a clean bill.
+**Mean of these 7: 8.0 / 10** (up from 7.71 — both platforms with a named open gap closed it the same day found, per this ecosystem's bounded-pass discipline).
 
-**Ecosystem mean, all 27 platform apps: 7.93 / 10** (down slightly from 8.0, purely a function of the 7 newly-discovered platforms not yet having a second pass — not a regression in the other 20). `I = 0` remains universal across all 27.
+**Ecosystem mean, all 27 platform apps: 8.0 / 10** (up from 7.93, now flat with the other 20 — see §5's original ceiling: `I = 0` is the only remaining gap anywhere in the ecosystem).
 
 ## 5. What this model says to do next
 
@@ -105,7 +105,7 @@ The picture has changed materially since pass 1 — four of the five signals bel
 3. ~~Dot.HR's role-gating gap~~ — **Resolved.**
 4. **New, smaller follow-ups from the deep passes** — none of these move a score, since they're documented gaps rather than open vulnerabilities, but they're the highest-value next actions: Dot.Pulse's knowledge-graph tables have no tenant column (unexploitable today, unsafe once a graph view ships) and its moderation service fail-opens on an unparseable AI response; Dot.Auction's real-time bidding has no broadcasting bootstrapped server-side at all (found during pass 2, correctly not half-fixed).
 5. **Every platform's `I=0` — still the whole ecosystem's real bottleneck, unchanged since v1.0.0.** With every other dimension now maxed across the original 20 platforms, this is no longer one gap among several — it is the *only* remaining gap standing between that group and a perfect MEGA score. Closing it for even one platform (Dot.Billing remains the best-scoped candidate per [os/19-Knowledge-Packs.md](19-Knowledge-Packs.md) §4) is unambiguously the single highest-leverage next action in the entire ecosystem.
-6. **New, from the 7 newly-discovered platforms (§4a):** two real, named, still-open gaps — Dot.Forms' webhook dispatch has no SSRF hardening, and Dot.Tutor has no booking UI/controller at all despite a fully-modeled schema. Neither is a live vulnerability today (Forms' scan came back otherwise clean; Tutor simply can't be used for its core purpose yet), but both are the correct next-pass targets for this group before it's folded into the same "second pass" cadence as the other 20.
+6. ~~Dot.Forms' SSRF gap, Dot.Tutor's missing booking UI~~ — **Resolved**, same day flagged. All 27 platforms now score a flat 8/10; `I=0` (signal 5) is the only gap left anywhere in the ecosystem.
 
 ## Change Log
 
@@ -115,6 +115,7 @@ The picture has changed materially since pass 1 — four of the five signals bel
 | 1.1.0 | 2026-08-01 | Sakhile Bhayi | Scored the 5 newly hand-authored platforms (§4); corrected the original 15-platform mean (was stated as 7.3, actually 7.53); added the ecosystem-wide 20-platform mean (7.6) and Dot.HR's real authorization gap as a §5 priority signal. |
 | 2.0.0 | 2026-08-02 | Sakhile Bhayi | **Re-derived after the second pass across all 20 platforms.** All five `S=1` platforms re-scored `S=2` after a dedicated deep-security pass (3 real bugs found and fixed, 2 confirmed clean). Dot.Notify's `E` moved 1→2 (webhook built). Dot.HR's `S` moved 1→2 (role-gating closed). Every platform now scores 8/10 — the ecosystem mean is a flat 8.0, with `I=0` as the only remaining gap anywhere. §5 rewritten to reflect that four of five prior signals are now resolved. |
 | 2.1.0 | 2026-08-02 | Sakhile Bhayi | **Scored the 7 newly-discovered platforms** (§4a): Dot.Files, Dot.Docs, Dot.Forms, Dot.Sheet, Dot.Engage, Dot.Press, Dot.Tutor — mean 7.71/10, two real named gaps left open (Dot.Forms' SSRF hardening, Dot.Tutor's missing booking UI). Recomputed ecosystem mean across all 27 platform apps: 7.93/10. §5 gained a 6th signal for these two new gaps. |
+| 2.2.0 | 2026-08-02 | Sakhile Bhayi | **Both §4a gaps closed same day.** Dot.Forms `S` 1→2 (SSRF guard shipped), Dot.Tutor `E` 1→2 (booking flow built). §4a mean 7.71→8.0; ecosystem mean across all 27 platform apps 7.93→8.0, now flat with the other 20. §5 signal 6 marked resolved. |
 
 ## Open Questions
 

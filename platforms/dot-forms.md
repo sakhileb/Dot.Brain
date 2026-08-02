@@ -1,6 +1,6 @@
 ---
 title: Dot.Forms — Platform Knowledge
-version: 1.0.0
+version: 1.1.0
 status: active
 owners: [Forms Platform Lead, Registry Agent]
 platform-id: dot-forms
@@ -64,17 +64,17 @@ None — no Knowledge Pack publishing yet.
 
 ## 10. Incident History Summary
 
-None recorded as a live incident. Real finding from the 2026-08-02 integration pass: `.env.example` had `DB_DATABASE` commented out despite `DB_USERNAME=infodot` already being set — fixed to `DB_DATABASE=infodot`.
+None recorded as a live incident. Real finding from the 2026-08-02 integration pass: `.env.example` had `DB_DATABASE` commented out despite `DB_USERNAME=infodot` already being set — fixed to `DB_DATABASE=infodot`. The SSRF gap flagged in that same pass (see 1.0.0 changelog) was closed in a follow-up second pass the same day — see 1.1.0.
 
 ## Change Log
 
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 1.0.0 | 2026-08-02 | Repository Steward Agent | Initial registration. Platform audited: SSO contract verified, DB_DATABASE misconfiguration fixed, favicon/branding consistency completed across two parallel layout systems, IDOR scan came back clean, README corrected (Laravel version, OpenAI vs. Anthropic, unshipped Reverb/Scout/Horizon claims removed). |
+| 1.1.0 | 2026-08-02 | Sakhile Bhayi | **SSRF gap closed** — `App\Support\SsrfGuard` rejects webhook/CRM URLs resolving to loopback/private/link-local addresses (incl. cloud metadata endpoints), enforced at both settings-save time and dispatch time; outbound requests no longer follow redirects. |
 
 ## Open Questions
 
 | Question | Owner → Approver |
 |---|---|
-| Webhook dispatch URLs in `FormSubmissionIntegrationDispatcher` have no SSRF protection — flagged, not fixed (out of bounded scope). Needs a dedicated pass. | Forms Platform Lead → Security Agent |
 | The custom-CSS sanitizer for form theming is non-exhaustive — worth a dedicated review before this handles untrusted input at scale. | Forms Platform Lead → Security Agent |
