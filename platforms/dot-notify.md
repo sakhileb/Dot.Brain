@@ -121,6 +121,14 @@ One incident pack (2026-02): a platform's alert class fired on a misconfigured t
 3. **PR back (class-throttling):** demote the 0.04-precision class to daily digest; confidence 0.81, impact `messaging.notification_precision` for the class and recovery of neighboring classes' action rates, guard: no missed guard-breach alerts (that class untouched), expiry 30 days.
 4. **Outcome:** `dkp:notify:out:2026-07-22:0001` — demoted class's digest precision 0.58; neighboring actionable classes' action rate +11% verified — attention freed measurably. The finding generalizes and is published as the attention-economics insight in §4, feeding `design.notification_precision` standards.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed; `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 32 files reformatted, formatting-only. `composer audit`: patched 6 `league/commonmark` DoS advisories. `npm audit`: patched postcss path-traversal + shell-quote ReDoS (via concurrently). Full suite reconfirmed green (84 tests / 77 passed / 181 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

@@ -134,6 +134,14 @@ The value chain's third link, closed:
 3. **PR back:** settlement-corridor routing — pre-scale corridor capacity in the harvest-peak window the Farms/Emall chain already predicts; confidence 0.80, impact `finance.settlement_latency_p95` −20% predicted, guard `finance.payout_delay_p50` flat, expiry 30 days.
 4. **Outcome:** `dkp:billing:out:2026-07-31:0001` verifies −24% settlement latency; a producer-facing effect lands one link upstream — Farms' `agriculture.produce_time_to_market_p50` improves without Farms changing anything. Three links verified; the chain-level Analytics product (§6) can now be assembled from owned segments.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed; `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 26 files reformatted, formatting-only. `composer audit`: patched 6 `league/commonmark` DoS advisories. `npm audit`: patched postcss path-traversal + shell-quote ReDoS (via concurrently). Full suite reconfirmed green (67 tests / 60 passed / 116 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

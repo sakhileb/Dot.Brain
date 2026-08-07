@@ -115,6 +115,14 @@ One incident pack (frost-window forecast miss, 2026-01) — lesson contributed t
 3. **Graph:** 14 `observation` nodes; `OBSERVED_WITH` edges to harvest-logistics-delay nodes at 0.66 (two seasons' corroboration ×1.10).
 4. **PR back:** logistics pre-positioning recommendation citing P-2026-001 *with condition checklist recorded* (lateritic access roads: yes; rainfall band: yes; daily moisture telemetry: yes) — confidence 0.84, impact `agriculture.harvest_logistics_delay_p50` −30% predicted, guard `agriculture.water_use_per_ton` flat, expiry 21 days. Farm team accepts; verification lands next harvest as an outcome pack.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed; `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 18 files reformatted, formatting-only. `composer audit`: patched 12 advisories across 2 packages — `guzzlehttp/guzzle` → 7.15.1 (host-only cookie scope, noncanonical cookie/host bypass, proxy-auth header leak to origin, URI-fragment Referer disclosure, unbounded response-cookies DoS) and `league/commonmark` baseline set. `npm audit`: already clean. Full suite reconfirmed green (62 tests / 55 passed / 107 assertions) after every change. (A stray, unrelated `.claude/worktrees/` directory — leftover Claude Code tooling artifact, not part of this platform — was correctly left out of every commit in this pass.)
+
 ## Change Log
 
 | Version | Date | Author | Change |

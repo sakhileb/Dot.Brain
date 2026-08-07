@@ -122,6 +122,14 @@ The value chain's final link — the view that makes the first three links visib
 3. **PR back:** view-composition — add Billing's `payout_delay_p50` as the chain's terminal segment (it was initially drafted ending at settlement); confidence 0.81, impact `analytics.view_utilization_rate` for the chain view, guard `analytics.restatement_rate` flat.
 4. **Outcome:** `dkp:analytics:out:2026-07-05:0002` — chain view opened by all four intended executive audiences in its first period; utilization 1.0 for the cohort; zero restatements. The 2026 wet-season story — harvest to payout, four platforms, three verified interventions — is now one legible view.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed; `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 146 files reformatted, formatting-only. `composer audit`: patched 6 `league/commonmark` DoS advisories. `npm audit`: patched a moderate postcss path-traversal advisory. Full suite reconfirmed green (494 tests / 487 passed / 1070 assertions) after every change. (Ran on the `feature/ecosystem-sso` branch, consistent with the rest of this platform's recent work.)
+
 ## Change Log
 
 | Version | Date | Author | Change |

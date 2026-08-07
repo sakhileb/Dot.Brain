@@ -114,6 +114,14 @@ One incident pack (2026): dispatch misroute F-PROC (shared with dot-mines — Ce
 3. **PR back:** dispatch load-balancing recommendation — stagger reroutes across benches during moisture-flagged shifts (evidence chain cites the P-2026-001 pattern's moisture ancestry, conditions checked); confidence 0.81, impact `mining.cycle_time_p50` −8% predicted, guard `central.alert_precision` flat, expiry 21 days.
 4. **Outcome:** control room accepts; `dkp:central:out:*` verification due next month — the loop's knowledge lane closing at knowledge speed while the operational lane keeps 30-second time.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed; `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 26 files reformatted, formatting-only. `composer audit`: patched 6 `league/commonmark` DoS advisories. `npm audit`: patched postcss path-traversal + shell-quote ReDoS (via concurrently). Full suite reconfirmed green (55 tests / 48 passed / 98 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

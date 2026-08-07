@@ -66,6 +66,14 @@ None — no Knowledge Pack publishing yet.
 
 None recorded as a live incident. Real finding from the 2026-08-02 integration pass: `.env.example` had `DB_DATABASE` commented out despite `DB_USERNAME=infodot` already being set — fixed to `DB_DATABASE=infodot`. The SSRF gap flagged in that same pass (see 1.0.0 changelog) was closed in a follow-up second pass the same day — see 1.1.0.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero (this platform's own wiki v0.7.0 entry covers this in full).
+- **Laravel Boost** — `laravel/boost` ^2.5 installed via `composer require --dev --ignore-platform-req=php` (`phpoffice/phpspreadsheet`, pinned by `maatwebsite/excel` 3.1.68, requires `php <8.5.0`; this ecosystem's default PHP is 8.5.9); `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 17 files reformatted, formatting-only. `composer audit`: **26 advisories across 9 packages**, all patched via `composer update laravel/framework phpoffice/phpspreadsheet symfony/polyfill-intl-idn league/commonmark --with-dependencies --ignore-platform-req=php`: `laravel/framework` (signed-URL path confusion, CRLF injection), `phpoffice/phpspreadsheet` → 1.30.6 (9 issues — most notably SSRF/RCE via `IOFactory::load` with a user-controlled filename, plus XSS via NumberFormat `@` substitution and multiple memory-exhaustion DoS vectors), `symfony/*` transitive bumps, `league/commonmark` baseline set. `npm audit`: patched Vite path-traversal/file-read advisories and `launch-editor` NTLMv2 disclosure; separately, `package.json` had `axios` pinned to an unusual `>=1.11.0 <=1.14.0` upper bound blocking 7 real axios advisories (prototype pollution, proxy-credential leak on redirect) — loosened to `^1.19.0` after confirming minimal usage (`bootstrap.js` default headers only) and a clean `npm run build`. Full suite reconfirmed green (36 passed / 3 skipped / 74 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

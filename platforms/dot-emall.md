@@ -116,6 +116,14 @@ The value chain's middle link, closed:
 3. **PR back (pair):** to Emall — feature fresh-produce category days 2–9 post-harvest-peak, confidence 0.82, impact `commerce.listing_time_to_first_order_p50` −25% predicted, guard `commerce.unsold_expiry_rate` flat; to Farms — the listing-timing PR its §5 subscribes to. Same chain, two sovereign decisions.
 4. **Outcome:** `dkp:emall:out:2026-07-29:0004` verifies −31% time-to-first-order with unsold expiry flat — the chain's first two links now verified end-to-end; Billing's settlement-latency link is the next seam.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed; `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 27 files reformatted, formatting-only. `composer audit`: patched 6 `league/commonmark` DoS advisories. `npm audit`: patched postcss path-traversal + shell-quote ReDoS (via concurrently). Full suite reconfirmed green (77 tests / 70 passed / 158 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

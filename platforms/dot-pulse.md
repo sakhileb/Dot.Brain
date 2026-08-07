@@ -128,6 +128,14 @@ One incident pack (2026-04): a draft topic-signal pack included a community name
 3. **PR back (expertise-routing):** route storage-topic questions to the specialist community; confidence 0.80, impact `social.time_to_first_answer_p50` −30% predicted for the topic, guard `social.question_resolution_rate` flat-or-better, expiry 45 days.
 4. **Outcome:** `dkp:pulse:out:2026-07-28:0001` — −37% time-to-first-answer verified against pre-routing baseline; resolution rate up 4 points. Side effect logged for `social.topic_signal_precision`: the same topic cluster was forwarded to Dot.Farms as an early warning, corroborated by its own loss data — first precision-numerator entry.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed. This repo auto-detected **both** Claude Code and GitHub Copilot as configured agents — the only platform in the pass to get both `CLAUDE.md` and `AGENTS.md` guideline files; `.mcp.json`/`boost.json` also in place. (Ran on the `feature/ecosystem-sso` branch, consistent with the rest of this platform's recent work.)
+- **Code-quality pass** — Pint: 92 files reformatted, formatting-only. `composer audit`: patched 6 `league/commonmark` DoS advisories. `npm audit`: patched postcss path-traversal + shell-quote ReDoS (via concurrently). Full suite reconfirmed green (106 tests / 99 passed / 186 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

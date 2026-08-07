@@ -130,6 +130,14 @@ One incident pack (2026-05): a pilot completion-streak mechanic on Dot.Tasks sho
 3. **PR back (deployment-fit):** offer milestone recognition to Dot.Farms for harvest-plan phase tracking; confidence 0.80, impact on Farms' `agriculture.harvest_logistics_delay_p50`, guard: paired wellbeing aggregate flat-or-better, expiry 60 days. Farms' human lead accepts — sovereignty intact; the mechanic ships with its intent label visible to end users (the acid test, literally rendered).
 4. **Outcome:** `dkp:dopemine:out:2026-07-15:0001` — outcome metric −9% (verified against counterfactual plan), engagement and outcome coupled, wellbeing guard flat. `engagement.outcome_coupling_rate` holds at 1.0 for the deployment.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed; `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 13 files reformatted, formatting-only. `composer audit`: patched 6 `league/commonmark` DoS advisories. `npm audit`: already clean. Full suite reconfirmed green (66 tests / 59 passed / 155 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

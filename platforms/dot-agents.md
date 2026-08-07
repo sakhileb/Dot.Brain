@@ -142,6 +142,14 @@ One incident pack (2026-03): a retry loop on a failing tool call consumed a clas
 3. **PR back (escalation calibration):** raise the Registry Agent class's impact-escalation floor for routine registry updates (scope-limited: metric registrations and status advances only; ethics-guard and confidence thresholds untouched); confidence 0.81, impact `colony.escalation_precision` +20 pts predicted, guards: zero governance-relevant actions auto-shipped (audit sampling ×4 for one quarter), expiry 60 days, co-signed by the charter's human approver per §7.
 4. **Outcome:** `dkp:agents:out:2026-07-28:0001` — escalation volume −38%, precision 0.04 → 0.31, audit sampling found zero improper auto-ships. Human attention reallocated to the escalations that actually needed it — the colony learning to calibrate its own asking.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed. This repo auto-detected **GitHub Copilot CLI** as its configured agent (pre-existing `revolution/laravel-boost-copilot-cli` package), not Claude Code — guidelines landed in `.github/instructions/laravel-boost.instructions.md` rather than `CLAUDE.md`; no `.mcp.json`/`boost.json` in this repo's own tracked diff as a result.
+- **Code-quality pass** — Pint: 14 files reformatted, formatting-only. `composer audit`: patched 6 `league/commonmark` DoS advisories (incl. CVE-2026-71488), safely within the existing constraint. `npm audit`: patched shell-quote ReDoS (via concurrently). One accepted residual: a low-severity, Windows-only esbuild advisory (GHSA-g7r4-m6w7-qqqr) needs a Vite 7→8 major-version bump to fix — left as a documented follow-up rather than forced through an unattended pass. Full suite reconfirmed green (837 passed / 1888 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

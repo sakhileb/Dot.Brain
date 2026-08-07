@@ -60,6 +60,14 @@ None — no Knowledge Pack publishing yet, so nothing for the Registry Agent to 
 
 None recorded. One real defect (a migration typo, `contrained()` instead of `constrained()`, which would fatal on first real `php artisan migrate`) was found and fixed during this platform's 2026-08-02 integration pass — caught before it ever reached a real environment, not a live incident.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed; `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — this platform was one of only two in the ecosystem (with InfoDot) missing `laravel/pint` entirely despite Boost's own `pint/core` guideline assuming its presence — installed it as part of this pass. Pint: 31 files reformatted, formatting-only. `composer audit`: patched 6 `league/commonmark` DoS advisories. `npm audit`: patched postcss path-traversal (2 rounds — a `postcss` and later a `shell-quote` advisory each needed their own `npm audit fix` pass). Full suite reconfirmed green (5 passed / 9 assertions) after every change. (This repo's `public/build/*` and `storage/objects.index` are tracked but not part of this pass's scope — pre-existing Vite build-hash churn was reverted before each commit, not shipped.)
+
 ## Change Log
 
 | Version | Date | Author | Change |

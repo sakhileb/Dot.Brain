@@ -123,6 +123,14 @@ One incident pack (2026-06): a programme's phase estimates were systematically c
 3. **PR back (phase-estimate calibration):** apply a wet-season multiplier band (1.25–1.4×) to civil-works phase estimates scheduled in rainfall windows; confidence 0.80, impact `delivery.schedule_calibration` toward 1.0, guard `delivery.milestone_on_time_rate` flat-or-better, expiry 90 days.
 4. **Outcome:** `dkp:projects:out:2026-07-26:0001` — calibration for treated phase types moved 1.31 → 1.08 verified against untreated cohort; guard improved. Logged as potential second-context evidence toward P-2026-001's condition family (seasonal-moisture effects on scheduled work), pending patterns review.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed; `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 27 files reformatted, formatting-only. `composer audit`: patched 6 `league/commonmark` DoS advisories. `npm audit`: patched postcss path-traversal + shell-quote ReDoS (via concurrently). Full suite reconfirmed green (69 tests / 62 passed / 123 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

@@ -68,6 +68,14 @@ None — no Knowledge Pack publishing yet.
 
 None recorded as a live incident. Real findings from the 2026-08-02 integration pass: `.env.example` had `DB_DATABASE` commented out, silently falling back to a nonexistent `laravel` database instead of the shared `infodot` instance — fixed before it could cause a real outage.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed. Boost's own install banner ("Let's give **Laravel** a Boost") surfaced a pre-existing, unrelated cosmetic gap: `.env`'s `APP_NAME` is still the stock `Laravel` value — already documented in this repo's own mail-theme code comments, not touched. `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 43 files reformatted, formatting-only. `composer audit`: **23 advisories across 9 packages**, all patched — same combination and fix as dot-press: `laravel/framework` (signed-URL/CRLF), `dompdf/dompdf` → 3.1.6, `symfony/*` transitive, `league/commonmark` baseline. `npm audit`: patched `ws` uninitialized-memory-disclosure + memory-exhaustion DoS (12 issues); separately, `package.json` had the same unusual `axios` upper-bound pin (`>=1.11.0 <=1.14.0`) found on dot-forms, blocking 7 real advisories — loosened to `^1.19.0`, usage confirmed minimal (`bootstrap.js` only), `npm run build` verified clean (TipTap + Alpine + Echo stack). Full suite reconfirmed green (43 passed / 4 skipped / 82 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

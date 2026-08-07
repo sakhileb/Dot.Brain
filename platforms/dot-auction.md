@@ -133,6 +133,14 @@ One incident pack (2026-04): a draft observation pack included per-lot bid count
 3. **PR back (mechanism-selection):** default agricultural-equipment consignments to timed english format; confidence 0.79 → provisional band, so it ships as a suggested default the auction house confirms per event; impact `auction.clearing_rate` +15% predicted, guard `auction.reserve_met_rate` flat, expiry 60 days.
 4. **Outcome:** `dkp:auction:out:2026-07-29:0001` — clearing rate +19% verified across 9 subsequent events; guard held; confidence re-scored to 0.84, and the recommendation graduates from provisional to recommendable — the corpus's first in-document demonstration of the 0.79→0.84 band crossing working as designed.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed; `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 24 files reformatted, formatting-only. `composer audit`: patched 6 `league/commonmark` DoS advisories. `npm audit`: patched postcss path-traversal + shell-quote ReDoS (via concurrently). Full suite reconfirmed green (67 tests / 60 passed / 135 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

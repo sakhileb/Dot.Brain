@@ -134,6 +134,14 @@ One incident pack (2026-05): a rural cell-window published with 4 vehicles — f
 3. **PR back (fleet-positioning):** pre-position van-class vehicles to market-town cells in the 2-hour window after harvest-dispatch peaks; confidence 0.80, impact `logistics.pickup_wait_p50` −25% predicted for those cell-windows, guards: `logistics.vehicle_downtime_rate` flat, no driver-hours ceiling breach, expiry 45 days.
 4. **Outcome:** `dkp:ehail:out:2026-07-30:0001` — −29% pickup wait verified against non-positioned cell cohort; guards held. Downstream, Farms' `agriculture.produce_time_to_market_p50` gains its third contributing platform — the value chain's fulfilment leg now has corridor-level evidence Analytics can join into the chain view.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed; `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 19 files reformatted, formatting-only. `composer audit`: patched 6 `league/commonmark` DoS advisories. `npm audit`: patched postcss path-traversal + shell-quote ReDoS (via concurrently). Full suite reconfirmed green (63 tests / 56 passed / 117 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

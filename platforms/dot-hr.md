@@ -138,6 +138,14 @@ One incident pack (2026-03): a skills-coverage pack for a nine-person site would
 3. **PR back (roster-pattern):** adopt the 30-minute-overlap template for wet-season rosters; confidence 0.80, impact `people.unfilled_shift_rate` −15% predicted, guards: overtime-hours aggregate flat, team wellbeing aggregate flat-or-better, expiry 60 days. Targets a template — no individual named anywhere in the chain.
 4. **Outcome:** `dkp:hr:out:2026-07-25:0001` — −19% unfilled shifts verified against non-adopting site cohort; both guards held. Downstream, Mines' shift-handover delays improved without Mines acting — the second cross-platform passive benefit in the corpus (after Billing→Farms).
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed; `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 11 files reformatted, formatting-only. `composer audit`: patched 6 `league/commonmark` DoS advisories. `npm audit`: already clean. Full suite reconfirmed green (43 tests / 42 passed / 91 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

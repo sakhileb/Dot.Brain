@@ -121,6 +121,14 @@ Two entries: (2026-05, shared with dopemine) the completion-streak decertificati
 3. **PR back (routine-frequency tuning):** the same moisture-index logic applied to *conveyor* inspection templates — adjacent equipment family, condition checklist run per patterns §5: rainfall exposure ✓, surface-condition dependency ✓, sensor coverage ✓; confidence 0.78 provisional; impact `routine.rework_rate` −20% predicted, guard `routine.overdue_rate` flat, expiry 60 days.
 4. **Outcome:** `dkp:tasks:out:2026-07-24:0001` — rework −23% verified, guard held; confidence re-scores to 0.83. Second graduation through the provisional band (after Auction §13), and the conveyor result is filed to the P-2026-001 condition-family review alongside Projects' wet-season calibration finding.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed; `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 23 files reformatted, formatting-only. `composer audit` / `npm audit`: already clean, no advisories found. Full suite reconfirmed green (24 tests / 24 passed / 45 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |
@@ -135,3 +143,4 @@ Two entries: (2026-05, shared with dopemine) the completion-streak decertificati
 |---|---|
 | Outcome-evidence seam: should domain-platform outcome packs be *required* to cite Tasks execution records where routines executed the change? | Learning Agent → Chief AI Engineer |
 | Open-classified template sharing: attribution expectations for orgs contributing checklist designs? | Delivery Agent → Chief Knowledge Engineer |
+| **Known unfixed branding bug (flagged 2026-08-07, not fixed as part of the standardization pass):** the welcome page, logo components, app layout, dashboard, and a notification subject line all say "Dot.Sheet" instead of "Dot.Tasks," with no real Dot.Tasks logo asset anywhere in the repo — this platform appears to have been scaffolded from a Dot.Sheet copy and never rebranded. Too large to fix inline during the code-quality pass (needs a real logo asset sourced/generated plus a welcome-page rewrite and 5+ file rebrand); worked around for the legal/email/auth pass (text-only wordmark, no hero photo, no welcome-page footer edit) and spun off as its own follow-up task rather than silently left. | Platform Lead → Design Agent |

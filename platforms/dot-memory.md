@@ -132,6 +132,14 @@ The two stragglers were proposed in brain.memory.md before any platform doc exis
 3. **PR back (index-strategy):** materialize validated provenance chains as a precomputed index (write-time cost for read-time depth); confidence 0.83, impact `memory.context_latency_p95` −40% predicted for chain-walk retrievals, guards: write-path latency flat, `memory.sla_attainment_rate` flat-or-better across all classes, expiry 45 days.
 4. **Outcome:** `dkp:memory:out:2026-07-28:0001` — chain-walk p95 −47% verified; write-path guard held; overall agent-context p95 improved 22%. Every platform's round-trip in this corpus ran through the retrieval this recommendation just made faster — infrastructure improving the loop that improves everything else.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed; `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 10 files reformatted, formatting-only. `composer audit`: patched 6 `league/commonmark` DoS advisories. `npm audit`: already clean. Full suite reconfirmed green (14 tests / 14 passed / 502 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

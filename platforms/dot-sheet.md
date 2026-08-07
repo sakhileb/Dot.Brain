@@ -66,6 +66,14 @@ None — no Knowledge Pack publishing yet.
 
 None recorded as a live incident, but the tenancy finding in §7 was a real, exploitable privilege-escalation gap (view/comment-tier users could write) — closed before any known exploitation, not after. Also found and fixed: a broken `/dashboard` route left in an inconsistent state by a prior commit (`routes/web.php` was updated but `dashboard.blade.php` still referenced the old variable names, which would throw an undefined-variable error on every visit).
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed via `composer require --dev --ignore-platform-req=php` (this platform shares `maatwebsite/excel`'s `phpoffice/phpspreadsheet` dependency with dot-forms, which requires `php <8.5.0` against this ecosystem's PHP 8.5.9); `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 42 files reformatted, formatting-only. `composer audit`: **26 advisories across 9 packages**, all patched — same combination and fix as dot-forms: `laravel/framework` (signed-URL/CRLF), `phpoffice/phpspreadsheet` → 1.30.6 (SSRF/RCE via `IOFactory::load`, XSS, memory-exhaustion DoS chain), `symfony/*` transitive, `league/commonmark` baseline. `npm audit`: patched `ws` uninitialized-memory-disclosure + memory-exhaustion DoS (via engine.io-client, 11 issues). Full suite reconfirmed green (45 passed / 7 skipped / 89 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

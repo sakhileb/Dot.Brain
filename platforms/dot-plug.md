@@ -125,6 +125,14 @@ One incident pack (2026-06): a certified logistics connector began reading a dat
 3. **PR back (capability-risk scoring):** add grant-utilization review to recertification — unused scopes proposed for narrowing at each cycle; confidence 0.79 provisional, ships as reviewer guidance with Extension Agent confirmation per case; impact `extension.anomaly_rate` −30% predicted, guard `extension.recert_backlog_days` flat (the review must not slow certification), expiry 90 days.
 4. **Outcome:** `dkp:plug:out:2026-07-29:0001` — anomaly rate −34% verified in the treated recertification cohort; backlog guard held; confidence 0.85, fourth provisional-band graduation. Least-privilege emerges as evidence-backed marketplace policy rather than imposed doctrine — the Brain teaching the platform its own security posture from its own data.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed; `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 12 files reformatted, formatting-only. `composer audit`: patched 12 advisories across 2 packages — `guzzlehttp/guzzle` → 7.15.1 (host/cookie/proxy-header advisory set, same fix as dot-farms) and `league/commonmark` baseline set. `npm audit`: already clean. Full suite reconfirmed green (59 tests / 52 passed / 103 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

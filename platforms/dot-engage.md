@@ -67,6 +67,14 @@ None — no Knowledge Pack publishing yet.
 
 **Real, live cross-tenant data leak** (§7) — the most severe finding across this 7-platform integration batch. Closed 2026-08-02, same day it was found, before any known exploitation. Introduced by an incomplete prior "fix" commit (`5dae85f`) that added the dashboard queries without team scoping.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed; `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 69 files reformatted, formatting-only. `composer audit`: this platform had the largest blast radius found in the pass — **25 advisories across 10 packages**, all patched: `laravel/framework` (temporary signed-URL path confusion, CRLF injection in the default email validation rule — CVE-2026-48019), `dompdf/dompdf` → 3.1.6 (6 issues: SVG file-existence leak, resource-exhaustion DoS ×2, local file read, chroot bypass), `spatie/laravel-medialibrary` → 11.23.0 (file-upload restriction bypass CVE-2026-48557, SSRF CVE-2026-48555), `symfony/http-foundation`/`http-kernel`/`mailer`/`mime`/`routing` (transitive, CRLF/SMTP injection, HEAD-request auth bypass, route-requirement bypass), `league/commonmark` (baseline DoS set). `npm audit`: patched Vite `server.fs.deny` bypass and `launch-editor` NTLMv2 hash disclosure. Full suite reconfirmed green (92 passed / 145 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

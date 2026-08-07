@@ -87,6 +87,14 @@ Checked and *not* affected: `brain.governance.md` and `dot-hr.md` do not referen
 
 This document does not resolve those four; each owning platform should re-review its own doc against this change during its next touch.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed; `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 8 files reformatted, formatting-only. `composer audit`: patched 6 `league/commonmark` DoS advisories. `npm audit`: patched postcss path-traversal and shell-quote ReDoS (via concurrently). Full suite reconfirmed green (64 tests / 57 passed / 120 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

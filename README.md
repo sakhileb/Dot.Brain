@@ -1,9 +1,9 @@
 ---
 title: Dot.Brain — Repository Root
-version: 1.3.0
+version: 1.4.0
 status: active
 owners: [Chief Intelligence Architect, Repository Steward Agent]
-last-review: 2026-08-01
+last-review: 2026-08-07
 ---
 
 # Dot.Brain
@@ -234,6 +234,7 @@ Followed by a one-paragraph purpose statement and a "Related documents" cross-li
 | 1.1.1 | 2026-08-01 | Repository Reviewer (prompt 07, AI) | Ownership matrix: domain-agent co-ownership of platform docs noted (28-agent roster per ADR-0010) |
 | 1.2.0 | 2026-08-01 | Repository Steward Agent | Added `os/` — the Ecosystem Operating System document set (see ADR-0012); repository map and annotated tree updated to reference it |
 | 1.3.0 | 2026-08-02 | Repository Steward Agent | Registered 7 more platforms (dot-files, dot-docs, dot-forms, dot-sheet, dot-engage, dot-press, dot-tutor) — added to the annotated tree; brain.platforms.md updated to 28 of 28 platforms registered. |
+| 1.4.0 | 2026-08-07 | Dot.Brain truth-reconciliation pass | Registered `infodot` — the ecosystem's own SSO hub had no platform document or registry row at all (`platforms/dot-infodot.md`, brain.platforms.md §2), despite every other platform's cross-platform relationship depending on it. Ecosystem is now 29 of 29 real, discovered platforms registered (28 prior + infodot). Also landed an ecosystem-wide verified-infrastructure pass across all 26 buildable platforms (legal/branding/auth standardization, Laravel Boost, code-quality + security patching) — see brain.platforms.md v1.0.21 for the full summary and each `platforms/<platform>.md` §"Verified Infrastructure State (2026-08-07)" for per-platform detail. |
 
 ## Open Questions
 

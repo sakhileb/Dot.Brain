@@ -64,6 +64,14 @@ None — no Knowledge Pack publishing yet.
 
 None recorded as a live incident. Real defect found and fixed during the 2026-08-02 integration pass: `/dashboard` was completely broken — `routes/web.php` rendered a Blade view (`dashboard`) that doesn't exist in this Inertia-based app (only an Inertia page component, `Dashboard.vue`, exists). Fixed by switching to `Inertia::render('Dashboard', [...])` with the exact prop shape the Vue component expects — verified by reading `Dashboard.vue` directly, not guessed. Also removed a dead Livewire-stack layout file (`@livewireStyles`/`@livewire(...)` directives) left over despite this app having no `livewire/livewire` dependency at all.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed (auto-detected Inertia + Vue guidelines, not Livewire — this is the one platform in the pass running that stack); `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 11 files reformatted, formatting-only. `composer audit`: **23 advisories across 9 packages**, all patched — `laravel/framework` (signed-URL/CRLF), `dompdf/dompdf` → 3.1.6, `symfony/*` transitive, `league/commonmark` baseline (same combination as dot-engage minus medialibrary). `npm audit`: patched Vite path-traversal/file-read advisories and `ws` uninitialized-memory-disclosure + memory-exhaustion DoS (12 issues total). Verified `npm run build` still succeeds post-fix (Inertia + Vue stack). Full suite reconfirmed green (54 passed / 4 skipped / 116 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |

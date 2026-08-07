@@ -135,6 +135,14 @@ One incident pack (2026-04): a minor-version motion-token change triggered vesti
 3. **PR back (component variant):** make outcome-first ordering the default Why-block layout (confidence score retained, repositioned); confidence 0.84, impact `design.why_block_comprehension_rate` +15 pts predicted, guards: no comprehension drop in any single org above floor, a11y audit clean, expiry 60 days.
 4. **Outcome:** `dkp:design:out:2026-07-21:0001` — comprehension +19 pts verified across surfaces; Charts disclosure comprehension improved as a passive benefit. The surface layer teaching the Brain how to be understood.
 
+## Verified Infrastructure State (2026-08-07)
+
+Confirmed directly against the real repo during the ecosystem-wide standardization + code-quality pass (full 26-platform summary: [brain.platforms.md](../brain.platforms.md) change log, v1.0.21):
+
+- **Legal/branding/auth** — branded Markdown-mail theme, complete POPIA-aligned Privacy Policy/Terms/Cookie Policy naming **BluePin Inc**, guest auth pages restyled to match the welcome-page hero.
+- **Laravel Boost** — `laravel/boost` ^2.5 installed; `.mcp.json`/`boost.json`/`CLAUDE.md` guideline block in place.
+- **Code-quality pass** — Pint: 7 files reformatted, formatting-only. `composer audit`: patched 6 `league/commonmark` DoS advisories. `npm audit`: patched postcss path-traversal + shell-quote ReDoS (via concurrently). Full suite reconfirmed green (58 tests / 51 passed / 106 assertions) after every change.
+
 ## Change Log
 
 | Version | Date | Author | Change |
